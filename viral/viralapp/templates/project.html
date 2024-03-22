@@ -51,7 +51,21 @@
             <button type="submit">Submit</button>
         </form>
     </div>
-    <div id="blog-container">
+
+    {% regroup all_projects by project_type as project_types %}
+    <!-- Display project groups horizontally -->
+    <div class="project-groups">
+        <div class="project-group" data-group="all">All</div>
+        {% for project_type in project_types %}
+        <div class="project-group" data-group="{{ project_type.grouper }}">
+            {{ project_type.grouper }}
+        </div>
+        {% endfor %}
+    </div>
+    <!-- <div id="blog-container"> -->
+
+    <!-- Display all projects -->
+    <div class="projects visi" id="all">
         {% for project in all_projects %}
         <div class="certificate-blog">
             <div class="row1">
@@ -87,6 +101,47 @@
         </div>
         {% endfor %}
     </div>
+
+
+    {% for project_type in project_types %}
+    <div class="projects" id="{{ project_type.grouper }}">
+        {% for project in project_type.list %}
+            <div class="certificate-blog">
+                <div class="row1">
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" class="certificate-image">
+                    <p class="certificate-title">{{ project.title }}</p>
+                </div>
+                {% if editable %}
+                <!-- Edit button -->
+                <button class="edit-project-btn" data-project-id="{{ project.pk }}">Edit</button>
+    
+                <!-- Input fields for editing -->
+                <div id="edit_form_{{ project.pk }}" style="display: none;">
+                    <input type="text" id="edit_title_by_{{ project.pk }}" value="{{ project.title }}"><br>
+                    <input type="file" id="edit_image_{{ project.pk }}" name="image"><br>
+                    <p>Description: </p><textarea id="edit_description_{{ project.pk }}">{{ project.description }}</textarea>
+                    <p>Project Type: </p><input type="text" id="edit_project_type_{{ project.pk }}"value="{{ project.project_type }}">
+                    <p>Code Link: </p><input type="text" id="edit_code_link_{{ project.pk }}"value="{{ project.code_link }}">
+                    <p>Code Type: </p><input type="text" id="edit_code_type_{{ project.pk }}"value="{{ project.code_type }}">
+                    <p>Live Link: </p><input type="text" id="edit_live_link_{{ project.pk }}"value="{{ project.live_link }}">
+                    <p>Display Order: </p><input type="number" id="edit_display_order_{{ project.pk }}"value="{{ project.display_order }}">
+                    <button class="save-edit-btn-pr"
+                        data-project-id="{{ project.pk }}">Save</button>
+                </div>
+                <a href="{% url 'delete_project' project.pk %}">Delete</a>
+    
+                {% else %}
+                <p class="certificate-issued-by">{{ project.description }}</p>
+                <div class="certificate-dates">
+                    <span><a href="{{ project.code_link }}">{{ project.code_link }}</a></span>
+                    <span><a href="{{ project.live_link }}">{{ project.live_link }}</a></span>
+                </div>
+                {% endif %}  
+            </div>
+        <!-- </div> -->
+        {% endfor %}
+    </div>
+    {% endfor %}
     <!-- Add more sections as needed -->
 </div>
 <!-- Add more sections as needed -->

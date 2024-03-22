@@ -70,3 +70,7 @@ button{
     width: 43px;
     height: 43px;
 }
+
+.light:hover {
+    cursor: pointer;
+}

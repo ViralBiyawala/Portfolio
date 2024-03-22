@@ -259,6 +259,7 @@ hr {
     text-align: left;
     border: 1px solid var(--profile-border-color);
     overflow: hidden;
+    margin: 1rem 0rem;
 }
 
 .row1 {
@@ -435,4 +436,22 @@ hr {
         display: flex;
         flex-direction: column;
     }
+}
+
+
+.project-group {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.projects {
+    display: none; /* Initially hide all project groups */
+}
+
+.projects.visi {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    box-sizing: border-box;
 }

@@ -1,12 +1,15 @@
 # viralapp/urls.py
 
 from django.urls import path
+from django.contrib.auth import views as auth_views
 from . import views
 # from .views import dashboard_view, update_img, index, education, certification, project, update_blog_entry, delete_blog_entry, add_education_entry, delete_education_entry, add_skill, del_skill, add_certificate
 
 urlpatterns = [
     # Add other URLs as needed
     path('', views.dashboard_view, name='dashboard'),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', views.custom_logout, name='logout'),
     path('index/', views.index, name='index'),
     path('update_img/', views.update_img, name='update_img'),
     path('education/', views.education, name='education'),

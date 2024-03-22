@@ -398,3 +398,20 @@ if (document.getElementById("add-project")) {
         });
     });
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const groups = document.querySelectorAll('.project-group');
+    groups.forEach(group => {
+        group.addEventListener('click', function () {
+            const groupId = this.getAttribute('data-group');
+            const projects = document.querySelectorAll('.projects');
+            projects.forEach(project => {
+                if (project.id === groupId) {
+                    project.classList.toggle('visi');
+                } else {
+                    project.classList.remove('visi');
+                }
+            });
+        });
+    });
+});

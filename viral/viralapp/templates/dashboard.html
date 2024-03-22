@@ -40,7 +40,11 @@
         </div>
     </div>
     {% else %}
-    <div id="intro-content">{{ intro.content }}</div>
+    <div id="intro-content">
+        {% for paragraph in intro_split %}
+        <p>{{ paragraph }}</p>
+    {% endfor %}
+    </div>
     <h3 class="subhead">What I Do!</h3>
     <div id="blog-container">
         {% for entry in blog_entries %}

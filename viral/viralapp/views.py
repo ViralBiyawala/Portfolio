@@ -1,6 +1,7 @@
 # viralapp/views.py
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
+from django.contrib.auth import logout
 from .models import Intro, BlogEntry, Education, Skills, Certificate, Projects
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
@@ -41,8 +42,8 @@ def dashboard_view(request):
             src = f"images/profile.{extension}"
             break
         
-    editable = False
-    editable = True
+    # editable = False
+    # editable = True
     
     blog_entries = BlogEntry.objects.all()
     
@@ -52,7 +53,7 @@ def dashboard_view(request):
         'is_superuser': True,
         'link':src,
         'intro': intro,
-        'editable': editable,
+        # 'editable': editable,
         'blog_entries': blog_entries,
     }
 
@@ -110,6 +111,8 @@ def index(request):
         intro.save()
         return redirect('index')
     
+    intro_split = intro.content.split('\n')
+    
     # print(superuser)
     allowed_extensions = ['jpg', 'jpeg', 'png']
 
@@ -121,8 +124,8 @@ def index(request):
             src = f"images/profile.{extension}"
             break
         
-    editable = False
-    editable = True
+    # editable = False
+    # editable = True
     
     blog_entries = BlogEntry.objects.all()
     
@@ -132,7 +135,8 @@ def index(request):
         'is_superuser': True,
         'link':src,
         'intro': intro,
-        'editable': editable,
+        'intro_split': intro_split,
+        # 'editable': editable,
         'blog_entries': blog_entries,
     }
 
@@ -185,8 +189,8 @@ def education(request):
             src = f"images/profile.{extension}"
             break
         
-    editable = False
-    editable = True
+    # editable = False
+    # editable = True
     
     context = {
         'theme_preference': theme_preference,
@@ -194,7 +198,7 @@ def education(request):
         'is_superuser': True,
         'link':src,
         'education_entries': education_entries,
-        'editable': editable,
+        # 'editable': editable,
         'skills_entries': skills_entries,
     }
 
@@ -244,8 +248,8 @@ def certification(request):
             src = f"images/profile.{extension}"
             break
     
-    editable = False
-    editable = True
+    # editable = False
+    # editable = True
     
     certificates = Certificate.objects.all().order_by('display_order')
     
@@ -255,7 +259,7 @@ def certification(request):
         'is_superuser': True,
         'link':src,
         'certificates': certificates,
-        'editable': editable,
+        # 'editable': editable,
     }
 
     return render(request, 'certification.html', context)
@@ -330,8 +334,8 @@ def project(request):
             src = f"images/profile.{extension}"
             break
         
-    editable = False
-    editable = True
+    # editable = False
+    # editable = True
     
     all_projects = Projects.objects.all().order_by('display_order')
     
@@ -340,7 +344,7 @@ def project(request):
         'user': superuser,
         'is_superuser': True,
         'link':src,
-        'editable': editable,
+        # 'editable': editable,
         'all_projects': all_projects,
     }
 
@@ -413,4 +417,7 @@ def delete_education_entry(request):
         Education.objects.filter(degree=degree, school=school, graduation_year=graduation_year).delete()
         # return JsonResponse({'message': 'Education entry deleted successfully'})
         return redirect('education')
-        
+
+def custom_logout(request):
+    logout(request)
+    return redirect('index')
