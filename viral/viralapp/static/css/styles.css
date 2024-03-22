@@ -1,0 +1,72 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lexend Deca', sans-serif;
+
+}
+
+body {
+    /* margin-top: 0rem; */
+    background-color: var(--background-color);
+    color: var(--primary-text-color);
+}
+
+.content {
+    text-align: center;
+}
+
+button{
+    border: 0px;
+    background-color: rgba(230, 253, 254, 0);
+}
+
+/* SVG CSS */
+.toolbar-container {
+    display: flex;
+    justify-content: center; 
+}
+
+.toolbar {
+    width:60%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    /* background-color: rgba(230, 253, 254, 0.89) */
+    border-radius:10px;
+    /* box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.8); */
+    padding: 0.5rem 0rem;
+    margin: 1rem 0rem 0rem 0rem;
+    background-color: var(--tool-backcolor);
+    backdrop-filter: blur(10px);
+}
+
+.toolbar a {
+    text-decoration: none;
+    color: #333; /* Change the color as needed */
+}
+
+.toolbar svg {
+    width: 33px;
+    height: 33px;
+    border-radius: 10px;
+}
+
+.active {
+    /* background-color: var(--selected); */
+    background: linear-gradient(to right, orange, red);
+}
+
+.inactive {
+    background-color: white;
+}
+
+.personal-info-box svg{
+    width: 43px;
+    height: 43px;
+}

@@ -1,0 +1,438 @@
+/* dashboard.css */
+
+/* Left Side */
+.personal-info-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--box-color);
+    padding: 0rem 0rem;
+    margin: 6rem 0rem 1rem 0rem;
+    border: 0.2rem solid var(--profile-border-color);
+    border-radius: 1rem;
+    box-shadow: 0rem 0rem 1rem var(--box-shadow-color);
+}
+
+.personal-info-box>h3 {
+    margin: 1rem 0rem;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+hr {
+    background-color: var(--profile-border-color);
+}
+
+.profile-picture {
+    width: 10rem;
+    height: 10rem;
+    border: 0.2rem solid var(--profile-border-color);
+    border-radius: 50%;
+    margin-top: -5rem;
+}
+
+.info {
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.details {
+    background-color: var(--background-color);
+    padding: 0.7rem;
+    margin: 2rem 0rem;
+    margin-top: 0.5rem;
+    border-radius: 1rem;
+    width: 85%;
+}
+
+.contact {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--secondary-text-color);
+    display: flex;
+    align-items: center;
+    margin-top: 1.2rem;
+    width: 100%;
+}
+
+.icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.data {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-left: 1.1rem;
+    margin-top: -0.2rem;
+}
+
+.name {
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: var(--primary-text-color);
+    margin: 0px;
+    padding: 0px;
+}
+
+.sidebar {
+    box-sizing: border-box;
+    padding: 0px 20px;
+}
+
+.hold {
+    width: 100%;
+    display: flex;
+}
+
+.job{
+    font-size: small;
+    margin-bottom: 0.1rem;
+}
+
+#setting{
+    margin: 0px;
+    margin-top: 1rem;
+}
+
+/* Right Side */
+.content {
+    box-sizing: border-box;
+    padding: 0px 20px;
+}
+
+.main-content {
+    margin: 1.45rem 0rem;
+    border: 0.1rem solid var(--profile-border-color);
+    border-radius: 1rem;
+    box-shadow: 0rem 0rem 1rem var(--box-shadow-color);
+    background-color: var(--box-color);
+    padding: 1rem 2rem;
+}
+
+.join p{
+    font-size: 1.3rem;
+    text-align: left;
+    font-weight: bold;
+}
+
+.subhead{
+    font-size: 1.2rem;
+    text-align: left;
+    font-weight: bold;
+}
+
+#intro-content {
+    width: 100%; /* Width equal to its parent */
+    height: auto; /* Adjust height to fit content */
+    /* resize: none; Disable textarea resize */
+    /* border: none; No border */
+    background-color: transparent; /* No background color */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    font-family: inherit; /* Use parent font-family */
+    font-size: inherit; /* Use parent font-size */
+    text-align: justify;
+    margin-bottom: 2rem;
+}
+
+.join {
+    display: flex;
+    align-items: center; /* Vertically center the items */
+}
+
+.horizontal-bar {
+    width: 10rem;
+    height: 0.2rem; /* Adjust height as needed */
+    border-radius: 10px;
+    margin-top: -17px;
+    margin-left: 1.5rem;
+    background: linear-gradient(to right, orange, red);
+}
+
+#blog-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.blog-entry {
+    width: 48%; 
+    margin: 0.5rem 0rem 0.5rem 0rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    text-align: left;
+}
+
+.blog-entry h4{
+    font-weight: 600;
+}
+
+/* Styling for even blog entries */
+.blog-entry:nth-child(even) {
+    background-color: rgba(255, 192, 203, 0.5); /* Pink with transparency */
+}
+
+/* Styling for odd blog entries */
+.blog-entry:nth-child(odd) {
+    background-color: rgba(173, 216, 230, 0.5); /* Light blue with transparency */
+}
+
+
+#education-container {
+
+    margin-bottom: 1.5rem;
+    z-index: 1;
+}
+
+.education-details {
+    flex: 1; /* Allow the details section to take up remaining space */
+}
+
+.education-entry {
+    border-left: 0.06rem solid var(--box-shadow-color); /* Adjust the thickness and color of the line as needed */
+    padding-left: 0px;
+    padding-bottom: 1rem;
+    padding-top: 0.3rem;
+    display: flex;
+    align-items: start;
+}
+
+.education-entry::before {
+    content: ''; 
+    transform: translateY(50%);
+    width: 12px; 
+    height: 12px; 
+    border-radius: 50%; 
+    background: linear-gradient(135deg, orange, red);
+    margin-left: -6px;
+}
+
+.education-details p{
+    text-align: left;
+    margin: 0.1rem 0.6rem;
+}
+
+.grad_year {
+    font-size: 0.9rem;
+    color: var(--secondary-text-color);
+}
+
+.school {
+    font-size: 0.9rem;
+    color: var(--secondary-text-color);
+}
+
+.degree{
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--profile-border-color);
+}
+
+#skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.skill {
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 0.4rem 0.7rem;
+    margin: 0.2rem 0rem;
+    margin-right: 0.4rem;
+    border: 0.02rem solid var(--primary-text-color);
+    background-color: var(--background-color);
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--primary-text-color);
+}
+
+.certificate-blog {
+    width: 48%; 
+    padding: 0.6rem 0.6rem;
+    border-radius: 1rem;
+    text-align: left;
+    border: 1px solid var(--profile-border-color);
+    overflow: hidden;
+}
+
+.row1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0rem;
+    margin-bottom: 0.5rem;
+}
+
+.certificate-image {
+    width: 100px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 0.7rem;
+}
+
+.certificate-title {
+    font-weight: bold;
+    margin: 0rem 1rem; 
+    flex: 1; 
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    text-align: center;
+}
+
+.certificate-blog > a {
+    text-decoration: none;
+    color:initial
+    /* color: var(--primary-text-color); */
+}
+
+.certificate-issued-by {
+    /* font-style: italic; */
+    font-weight: bolder;
+    margin: 0rem;
+    margin-bottom: 0.2rem;
+    padding: 0rem;
+    font-size: 1rem;
+}
+
+.certificate-dates {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--secondary-text-color);
+    margin-bottom: 0.2rem;
+    padding-bottom: 0rem;
+}
+
+.certificate-skills {
+    font-size: 0.9rem;
+    margin-bottom: 0.1rem;
+}
+
+
+/* Uploading the image button */
+.pp{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0rem;
+}
+
+#input-file{
+    display: none;
+}
+
+.pp-label{
+    display: none;
+    position: relative;
+    margin-top: -6rem;
+}
+
+/* Responsive Part */
+@media (min-width: 1030px) {
+
+    /* Medium screen and above */
+    .sidebar {
+        width: 30%;
+    }
+
+    .content {
+        width: 70%;
+    }
+}
+
+@media (max-width: 1030px) and (min-width:936px) {
+
+    /* Large screen and above */
+    .sidebar {
+        width: 34%;
+    }
+
+    .content {
+        width: 66%;
+    }
+}
+
+@media (max-width: 936px) and (min-width:700px) {
+
+    /* Large screen and above */
+    .sidebar {
+        width: 45%;
+    }
+
+    .content {
+        width: 55%;
+    }
+    .blog-entry {
+        width: 100%; 
+    }
+
+    .certificate-blog {
+        width: 100%; 
+    }
+    
+    .row1 {
+        flex-direction: column; /* Display items vertically */
+        align-items: center; /* Horizontally center */
+    }
+
+    .certificate-title{
+        margin: 0.1rem 0rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .hold {
+        width: 100%;
+        display: block;
+    }
+
+    .sidebar {
+        width: 100%;
+    }
+
+    .content {
+        width: 100%;
+    }
+
+    .toolbar {
+        position: fixed;
+        margin: 0rem;
+        bottom: 1rem;
+        width: 88%;
+    }
+
+    .main-content {
+        margin-bottom: 6rem;
+    }
+
+    .blog-entry {
+        width: 100%; 
+    }
+
+    .certificate-blog {
+        width: 100%; 
+    }
+
+    .row1 {
+        flex-direction: column; /* Display items vertically */
+        align-items: center; /* Horizontally center */
+    }
+
+    .certificate-title{
+        margin: 0.1rem 0rem;
+    }
+
+    .certificate-dates{
+        display: flex;
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,57 @@
+<!-- dashboard.html -->
+
+{% extends 'base.html' %}
+{% block title %}Dashboard - Your Portfolio{% endblock %}
+
+{% load static %}
+
+{% block extra_css %}
+<!-- Additional CSS specific to the dashboard -->
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+{% endblock %}
+
+{% block content %}
+<!-- Main content -->
+<div class="main-content">
+    <div class="join">
+        <p>ABOUT ME </p>
+        <div class="horizontal-bar"></div>
+    </div>
+    {% if editable %}
+    <form method="POST">
+        {% csrf_token %}
+        <textarea name="content" id="intro-content"
+            placeholder="Enter your intro paragraph here...">{{ intro.content }}</textarea>
+        <button type="submit">Save</button>
+    </form>
+    <p class="subhead">What I Do!</p>
+    <div id="about-me-section">
+        <!-- Plus button to add new blog entries -->
+        <button id="add-blog-btn">Add Blog</button>
+        <!-- Container for blog entries -->
+        <div id="blog-container">
+            {% for entry in blog_entries %}
+            <div class="blog-entry">
+                <h2>{{ entry.title }}</h2>
+                <p>{{ entry.content }}</p>
+                <button class="delete-btn" data-title="{{ entry.title }}" data-content="{{ entry.content }}">Delete</button>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% else %}
+    <div id="intro-content">{{ intro.content }}</div>
+    <h3 class="subhead">What I Do!</h3>
+    <div id="blog-container">
+        {% for entry in blog_entries %}
+        <div class="blog-entry" >
+            <h4>{{ entry.title }}</h4>
+            <p>{{ entry.content }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <!-- Add more sections as needed -->
+</div>
+<!-- Add more sections as needed -->
+{% endblock %}

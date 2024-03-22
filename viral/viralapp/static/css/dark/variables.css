@@ -1,0 +1,12 @@
+/* variables-dark.css */
+:root {
+    --box-color: #4b5d72;  /* dark box color */
+    --background-color: #01032a;  /* dark background color */
+    --box-shadow-color: rgb(255, 255, 255);  /* dark box shadow color */
+    --primary-text-color: #ffffff;  /* White text color */
+    --secondary-text-color: #a8a8a8;  /* dark gray text color */
+    --link-color: #4db2ff;  /* dark blue link color */
+    --profile-border-color: #ffffff;  /* dark orange profile border color */
+    --selected: rgb(255, 165, 0);
+    --tool-backcolor: rgba(255, 255, 255, 0.1);
+}

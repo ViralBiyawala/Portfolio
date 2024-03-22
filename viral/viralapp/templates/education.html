@@ -1,0 +1,77 @@
+<!-- dashboard.html -->
+
+{% extends 'base.html' %}
+{% block title %}Dashboard - Your Portfolio{% endblock %}
+
+{% load static %}
+
+{% block extra_css %}
+<!-- Additional CSS specific to the dashboard -->
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}" />
+{% endblock %}
+
+{% block content %}
+<!-- Main content -->
+<div class="main-content">
+    <div class="join">
+        <p>EDUCATION </p>
+        <div class="horizontal-bar"></div>
+    </div>
+
+    <div id="education-container">
+        {% for entry in education_entries %}
+        <div class="education-entry">
+            <div class="education-details">
+                <p class="grad_year">{{ entry.graduation_year }}</p>
+                <p class="degree"> {{ entry.degree }}</p>
+                <p class="school"> {{ entry.school }}</p>
+            </div>
+            <div class="education-actions">
+                <!-- Add Update and Delete buttons here -->
+                <!-- <button class="update-btn">Update</button> -->
+                {% if editable %}
+                <form method="post" action="{% url 'delete_education_entry' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="graduation_year" value="{{ entry.graduation_year }}">
+                    <input type="hidden" name="degree" value="{{ entry.degree }}">
+                    <input type="hidden" name="school" value="{{ entry.school }}">
+                    <button type="submit" class="delete-btn">Delete</button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if editable %}
+    <button id="add-education-btn">Add Education</button>
+    <!-- Add form for adding new education entry (hidden by default) -->
+    <form id="add-education-form">
+        <input type="text" name="degree" placeholder="Degree">
+        <input type="text" name="school" placeholder="School">
+        <input type="text" name="graduation_year" placeholder="Graduation Year">
+        <button type="submit">Add</button>
+    </form>
+    {% endif %}
+
+    <h3 class="subhead">Skills</h3>
+    <div id="skills-container">
+        {% for entry in skills_entries %}
+        <span class="skill">{{ entry.skills_list }} 
+            {% if editable %}<button class="delete-skill-btn"
+                data-skill="{{ entry.skills_list }}">Delete</button> {% endif %}    
+            </span >
+        {% endfor %}
+    </div>
+
+    {% if editable %}
+    <form id="add-skill">
+        <input type="text" name="skill" placeholder="Enter skill">
+        <button type="submit" name="add_skill">Add</button>
+    </form>
+    {% endif %}
+
+    <!-- Add more sections as needed -->
+</div>
+<!-- Add more sections as needed -->
+{% endblock %}
