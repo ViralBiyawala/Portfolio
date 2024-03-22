@@ -247,78 +247,154 @@ if (document.getElementById("add-skill")) {
 }
 
 // dashboard.js
-if(document.getElementById("add-certificate")) {
-var addCertificateBtn = document.getElementById('add-certificate');
-addCertificateBtn.addEventListener('click', function() {
-    var certificateFormContainer = document.getElementById('certificate-form-container');
-    certificateFormContainer.style.display = (certificateFormContainer.style.display === 'none') ? 'block' : 'none';
-});
-
-var certificateForm = document.getElementById('certificate-form');
-certificateForm.addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent default form submission
-
-    var formData = new FormData(certificateForm);
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', '/add_certificate/', true);
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            location.reload(); // Reload the page after successfully adding certificate
-        }
-        else{
-            console.log("Failed to add certificate");
-        }
-    };
-    xhr.send(formData);
-});
-
-
-document.querySelectorAll('.edit-certificate-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-        var certificateId = this.getAttribute('data-certificate-id');
-        var editForm = document.getElementById('edit_form_' + certificateId);
-        editForm.style.display = (editForm.style.display === 'none') ? 'block' : 'none';
+if (document.getElementById("add-certificate")) {
+    var addCertificateBtn = document.getElementById('add-certificate');
+    addCertificateBtn.addEventListener('click', function () {
+        var certificateFormContainer = document.getElementById('certificate-form-container');
+        certificateFormContainer.style.display = (certificateFormContainer.style.display === 'none') ? 'block' : 'none';
     });
-});
 
-document.querySelectorAll('.save-edit-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-        var certificateId = this.getAttribute('data-certificate-id');
-        var issuedBy = document.getElementById('edit_issued_by_' + certificateId).value;
-        var linkBy = document.getElementById('edit_link_by_' + certificateId).value;
-        var titleBy = document.getElementById('edit_title_by_' + certificateId).value;
-        var expiryDate = document.getElementById('edit_expiry_date_' + certificateId).value;
-        var dateAwarded = document.getElementById('edit_date_awarded_' + certificateId).value;
-        var skillsGained = document.getElementById('edit_skills_gained_' + certificateId).value;
-        var displayOrder = document.getElementById('edit_display_order_' + certificateId).value;
-        var image = document.getElementById('edit_image_' + certificateId).files[0];
+    var certificateForm = document.getElementById('certificate-form');
+    certificateForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent default form submission
 
-        var formData = new FormData();
-        formData.append('issued_by', issuedBy);
-        formData.append('link', linkBy);
-        formData.append('title', titleBy);
-        formData.append('date_awarded', dateAwarded);
-        formData.append('expiry_date', expiryDate);
-        formData.append('skills_gained', skillsGained);
-        formData.append('display_order', displayOrder);
-        formData.append('image', image);
+        var formData = new FormData(certificateForm);
 
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/update_certificate/' + certificateId + '/', true);
-        xhr.onreadystatechange = function() {
+        xhr.open('POST', '/add_certificate/', true);
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        xhr.onreadystatechange = function () {
             if (xhr.readyState === 4 && xhr.status === 200) {
-                var response = JSON.parse(xhr.responseText);
-                if (response.success) {
-                    location.reload();
-                } else {
-                    // Handle errors if update fails
-                    console.error('Error updating certificate:', response.errors);
-                }
+                location.reload(); // Reload the page after successfully adding certificate
+            }
+            else {
+                console.log("Failed to add certificate");
             }
         };
         xhr.send(formData);
     });
-});
+
+
+    document.querySelectorAll('.edit-certificate-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var certificateId = this.getAttribute('data-certificate-id');
+            var editForm = document.getElementById('edit_form_' + certificateId);
+            editForm.style.display = (editForm.style.display === 'none') ? 'block' : 'none';
+        });
+    });
+
+    document.querySelectorAll('.save-edit-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var certificateId = this.getAttribute('data-certificate-id');
+            var issuedBy = document.getElementById('edit_issued_by_' + certificateId).value;
+            var linkBy = document.getElementById('edit_link_by_' + certificateId).value;
+            var titleBy = document.getElementById('edit_title_by_' + certificateId).value;
+            var expiryDate = document.getElementById('edit_expiry_date_' + certificateId).value;
+            var dateAwarded = document.getElementById('edit_date_awarded_' + certificateId).value;
+            var skillsGained = document.getElementById('edit_skills_gained_' + certificateId).value;
+            var displayOrder = document.getElementById('edit_display_order_' + certificateId).value;
+            var image = document.getElementById('edit_image_' + certificateId).files[0];
+
+            var formData = new FormData();
+            formData.append('issued_by', issuedBy);
+            formData.append('link', linkBy);
+            formData.append('title', titleBy);
+            formData.append('date_awarded', dateAwarded);
+            formData.append('expiry_date', expiryDate);
+            formData.append('skills_gained', skillsGained);
+            formData.append('display_order', displayOrder);
+            formData.append('image', image);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/update_certificate/' + certificateId + '/', true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        location.reload();
+                    } else {
+                        // Handle errors if update fails
+                        console.error('Error updating certificate:', response.errors);
+                    }
+                }
+            };
+            xhr.send(formData);
+        });
+    });
+}
+
+// dashboard.js
+if (document.getElementById("add-project")) {
+    var addCertificateBtn = document.getElementById('add-project');
+    addCertificateBtn.addEventListener('click', function () {
+        var certificateFormContainer = document.getElementById('project-form-container');
+        certificateFormContainer.style.display = (certificateFormContainer.style.display === 'none') ? 'block' : 'none';
+    });
+
+    var certificateForm = document.getElementById('project-form');
+    certificateForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        var formData = new FormData(certificateForm);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/add_project/', true);
+        xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                location.reload(); // Reload the page after successfully adding certificate
+            }
+            else {
+                console.log("Failed to add Project");
+            }
+        };
+        xhr.send(formData);
+    });
+
+    document.querySelectorAll('.edit-project-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var projectId = this.getAttribute('data-project-id');
+            var editForm = document.getElementById('edit_form_' + projectId);
+            editForm.style.display = (editForm.style.display === 'none') ? 'block' : 'none';
+        });
+    });
+
+    document.querySelectorAll('.save-edit-btn-pr').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            var projectId = this.getAttribute('data-project-id');
+            var titleBy = document.getElementById('edit_title_by_' + projectId).value;
+            var image = document.getElementById('edit_image_' + projectId).files[0];
+            var description = document.getElementById('edit_description_' + projectId).value;
+            var projectType = document.getElementById('edit_project_type_' + projectId).value;
+            var codelinkBy = document.getElementById('edit_code_link_' + projectId).value;
+            var codeType = document.getElementById('edit_code_type_' + projectId).value;
+            var livelinkBy = document.getElementById('edit_live_link_' + projectId).value;
+            var displayOrder = document.getElementById('edit_display_order_' + projectId).value;
+
+            var formData = new FormData();
+            formData.append('title', titleBy);
+            formData.append('image', image);
+            formData.append('description', description);
+            formData.append('project_type', projectType);
+            formData.append('code_link', codelinkBy);
+            formData.append('code_type', codeType);
+            formData.append('live_link', livelinkBy);
+            formData.append('display_order', displayOrder);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/update_project/' + projectId + '/', true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.success) {
+                        location.reload();
+                    } else {
+                        // Handle errors if update fails
+                        console.error('Error updating certificate:', response.errors);
+                    }
+                }
+            };
+            xhr.send(formData);
+        });
+    });
 }

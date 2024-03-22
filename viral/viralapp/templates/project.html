@@ -13,7 +13,80 @@
 {% block content %}
 <!-- Main content -->
 <div class="main-content">
-    <h2>Welcome to Your Project</h2>
+    <div class="join">
+        <p>Projects</p>
+        <div class="horizontal-bar"></div>
+    </div>
+    {%if editable %}
+    <button id="add-project">Add Project</button> <!-- Button to trigger the form -->
+    {% endif %}
+    <div id="project-form-container" style="display: none;">
+        <!-- Certificate form -->
+        <form id="project-form" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="id_title">Title:</label><br>
+            <input type="text" id="id_title" name="title" required><br>
+
+            <label for="id_image">Image:</label><br>
+            <input type="file" id="id_image" name="image" required><br>
+            
+            <label for="id_description">Description:</label><br>
+            <textarea id="id_description" name="description" required></textarea><br>
+
+            <label for="id_project_type">Project Type:</label><br>
+            <input type="text" id="id_project_type" name="project_type" required><br>
+            
+            <label for="id_code_link">Code link:</label><br>
+            <input type="text" id="id_code_link" name="code_link" required><br>
+            
+            <label for="id_code_type">Code place:</label><br>
+            <input type="text" id="id_code_type" name="code_type" required><br>
+
+            <label for="id_live_link">Live Link:</label><br>
+            <input type="text" id="id_live_link" name="live_link" required><br>
+
+            <label for="display_order">Order:</label><br>
+            <input type="number" id="display_order" name="display_order" required><br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <div id="blog-container">
+        {% for project in all_projects %}
+        <div class="certificate-blog">
+            <div class="row1">
+                <img src="{{ project.image.url }}" alt="{{ project.title }}" class="certificate-image">
+                <p class="certificate-title">{{ project.title }}</p>
+            </div>
+            {% if editable %}
+            <!-- Edit button -->
+            <button class="edit-project-btn" data-project-id="{{ project.pk }}">Edit</button>
+
+            <!-- Input fields for editing -->
+            <div id="edit_form_{{ project.pk }}" style="display: none;">
+                <input type="text" id="edit_title_by_{{ project.pk }}" value="{{ project.title }}"><br>
+                <input type="file" id="edit_image_{{ project.pk }}" name="image"><br>
+                <p>Description: </p><textarea id="edit_description_{{ project.pk }}">{{ project.description }}</textarea>
+                <p>Project Type: </p><input type="text" id="edit_project_type_{{ project.pk }}"value="{{ project.project_type }}">
+                <p>Code Link: </p><input type="text" id="edit_code_link_{{ project.pk }}"value="{{ project.code_link }}">
+                <p>Code Type: </p><input type="text" id="edit_code_type_{{ project.pk }}"value="{{ project.code_type }}">
+                <p>Live Link: </p><input type="text" id="edit_live_link_{{ project.pk }}"value="{{ project.live_link }}">
+                <p>Display Order: </p><input type="number" id="edit_display_order_{{ project.pk }}"value="{{ project.display_order }}">
+                <button class="save-edit-btn-pr"
+                    data-project-id="{{ project.pk }}">Save</button>
+            </div>
+            <a href="{% url 'delete_project' project.pk %}">Delete</a>
+
+            {% else %}
+            <p class="certificate-issued-by">{{ project.description }}</p>
+            <div class="certificate-dates">
+                <span><a href="{{ project.code_link }}">{{ project.code_link }}</a></span>
+                <span><a href="{{ project.live_link }}">{{ project.live_link }}</a></span>
+            </div>
+            {% endif %}  
+        </div>
+        {% endfor %}
+    </div>
     <!-- Add more sections as needed -->
 </div>
 <!-- Add more sections as needed -->

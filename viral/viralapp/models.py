@@ -58,21 +58,28 @@ class Projects(models.Model):
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to='static/images/project_images/')
     description = models.TextField()
-    project_type = models.TextField()
+    project_type = models.TextField(blank=True)
     code_link = models.URLField(blank=True)
+    code_type = models.TextField(blank=True)
     live_link = models.URLField(blank=True)
     display_order = models.PositiveIntegerField()
     
     def __str__(self):
         return self.title
     
+    def delete(self, *args, **kwargs):
+        if self.image:
+            if os.path.isfile(self.image.path):
+                os.remove(self.image.path)
+        super().delete(*args, **kwargs)
+    
     def save(self, *args, **kwargs):
         if self.pk:  
-            old_certificate = Certificate.objects.get(pk=self.pk)
-            if self.image != old_certificate.image:
-                if old_certificate.image:
-                    if os.path.isfile(old_certificate.image.path):
-                        os.remove(old_certificate.image.path)
+            old_project = Projects.objects.get(pk=self.pk)
+            if self.image != old_project.image:
+                if old_project.image:
+                    if os.path.isfile(old_project.image.path):
+                        os.remove(old_project.image.path)
         super().save(*args, **kwargs)
 
 class Skills(models.Model):

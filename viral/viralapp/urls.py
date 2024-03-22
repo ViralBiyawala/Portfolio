@@ -21,4 +21,8 @@ urlpatterns = [
     path('add_certificate/', views.add_certificate, name='add_certificate'),
     path('certificates/<int:pk>/delete/', views.delete_certificate, name='delete_certificate'),
     path('update_certificate/<int:pk>/', views.update_certificate, name='update_certificate'),
+    path('add_project/', views.add_project, name='add_project'),
+    path('project/<int:pk>/delete/', views.delete_project, name='delete_project'),
+    path('update_project/<int:pk>/', views.update_project, name='update_project'),
+    
 ]

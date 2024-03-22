@@ -1,7 +1,7 @@
 # viralapp/views.py
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
-from .models import Intro, BlogEntry, Education, Skills, Certificate
+from .models import Intro, BlogEntry, Education, Skills, Certificate, Projects
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.http import JsonResponse
@@ -42,7 +42,7 @@ def dashboard_view(request):
             break
         
     editable = False
-    # editable = True
+    editable = True
     
     blog_entries = BlogEntry.objects.all()
     
@@ -122,7 +122,7 @@ def index(request):
             break
         
     editable = False
-    # editable = True
+    editable = True
     
     blog_entries = BlogEntry.objects.all()
     
@@ -186,7 +186,7 @@ def education(request):
             break
         
     editable = False
-    # editable = True
+    editable = True
     
     context = {
         'theme_preference': theme_preference,
@@ -245,7 +245,7 @@ def certification(request):
             break
     
     editable = False
-    # editable = True
+    editable = True
     
     certificates = Certificate.objects.all().order_by('display_order')
     
@@ -329,15 +329,68 @@ def project(request):
         if os.path.isfile(image_path) == True:
             src = f"images/profile.{extension}"
             break
+        
+    editable = False
+    editable = True
+    
+    all_projects = Projects.objects.all().order_by('display_order')
     
     context = {
         'theme_preference': theme_preference,
         'user': superuser,
         'is_superuser': True,
         'link':src,
+        'editable': editable,
+        'all_projects': all_projects,
     }
 
     return render(request, 'project.html', context)
+
+def add_project(request):
+    if request.method == 'POST':
+        form = ProjectsForm(request.POST, request.FILES)
+        if form.is_valid():
+            Projectfr = form.save(commit=False)
+            new_display_order = Projectfr.display_order
+            
+            # Adjust display order of existing Projectss
+            Projectss_to_adjust = Projects.objects.filter(display_order__gte=new_display_order)
+            for pro in Projectss_to_adjust:
+                pro.display_order += 1
+                pro.save()
+            
+            Projectfr.save()
+            return JsonResponse({'success': True})
+        else:
+            return redirect('project')
+    return JsonResponse({'success': False, 'errors': 'Invalid request method'})
+
+def delete_project(request, pk):
+    project = get_object_or_404(Projects, pk=pk)
+    project.delete()
+    return redirect('project')
+
+@csrf_exempt
+def update_project(request, pk):
+    project = get_object_or_404(Projects, pk=pk)
+    if request.method == 'POST':
+        form = ProjectsForm(request.POST, request.FILES, instance=project)
+        if form.is_valid():
+            project = form.save(commit=False)
+            new_display_order = project.display_order
+            
+            # Adjust display order of existing certificates
+            project_to_adjust = Projects.objects.filter(display_order__gte=new_display_order)
+            for pro in project_to_adjust:
+                pro.display_order += 1
+                pro.save()
+            
+            project.save()
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors})
+    return JsonResponse({'success': False, 'errors': 'Invalid request method'})
+
 
 @csrf_exempt
 def add_education_entry(request):

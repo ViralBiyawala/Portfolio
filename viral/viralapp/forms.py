@@ -6,7 +6,7 @@ class CertificateForm(forms.ModelForm):
         model = Certificate
         fields = '__all__'
 
-class ProjectstForm(forms.ModelForm):
+class ProjectsForm(forms.ModelForm):
     class Meta:
         model = Projects
         fields = '__all__'
