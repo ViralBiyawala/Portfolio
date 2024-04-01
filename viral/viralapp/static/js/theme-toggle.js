@@ -98,14 +98,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 updateBlogEntry(blogEntry);
             });
 
-            // Create a button for deleting the blog entry
-            // var deleteBtn = document.createElement('button');
-            // deleteBtn.textContent = 'Delete';
-            // deleteBtn.classList.add('delete-btn');
-            // deleteBtn.addEventListener('click', function() {
-            //     deleteBlogEntry(blogEntry);
-            // });
-
             // Append input fields and buttons to the blog entry container
             blogEntry.appendChild(titleInput);
             blogEntry.appendChild(contentTextarea);
@@ -129,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     // Handle success response
+                    window.location.reload();
                     console.log('Blog entry updated successfully');
                 }
             };
@@ -403,7 +396,18 @@ document.addEventListener('DOMContentLoaded', function () {
     const groups = document.querySelectorAll('.project-group');
     groups.forEach(group => {
         group.addEventListener('click', function () {
+            // console.log();
+            // this.classList.toggle('select')
             const groupId = this.getAttribute('data-group');
+            groups.forEach(groupins => {
+                if(groupins.getAttribute('data-group') == groupId){
+                    // console.log(groupId);
+                    group.classList.toggle('select');
+                }
+                else{
+                    groupins.classList.remove('select');
+                }
+            });
             const projects = document.querySelectorAll('.projects');
             projects.forEach(project => {
                 if (project.id === groupId) {
@@ -415,3 +419,58 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+
+// Upload Resume
+if(document.getElementById('resumeFile')){
+document.getElementById('uploadBtn').addEventListener('click', function(event) {
+    event.preventDefault();
+    var resumeFile = document.getElementById('resumeFile').files[0];
+    var formData = new FormData();
+    formData.append('resume_file', resumeFile);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/upload_resume/', true);
+    xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}');
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    alert('Resume uploaded successfully!');
+                    location.reload();
+                } else {
+                    alert('Error uploading resume:', response.errors);
+                    location.reload();
+                }
+            } else {
+                alert('Error uploading resume:', xhr.responseText);
+                location.reload();
+            }
+        }
+    };
+    xhr.send(formData);
+});
+}
+
+// Download Resume
+document.getElementById('downloadBtn').addEventListener('click', function() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/download_resume/', true);
+    xhr.responseType = 'blob'; // Set response type to 'blob' (binary data)
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var blob = xhr.response; // Get the binary data
+                var link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = 'ViralBiyawalaResume.pdf'; // Set the filename for the downloaded file
+                link.click();
+            } else {
+                console.error('Error downloading resume:', xhr.responseText);
+            }
+        }
+    };
+    xhr.send();
+});
+

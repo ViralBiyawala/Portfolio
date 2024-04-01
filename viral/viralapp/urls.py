@@ -27,5 +27,6 @@ urlpatterns = [
     path('add_project/', views.add_project, name='add_project'),
     path('project/<int:pk>/delete/', views.delete_project, name='delete_project'),
     path('update_project/<int:pk>/', views.update_project, name='update_project'),
-    
+    path('upload_resume/', views.upload_resume, name='upload_resume'),
+    path('download_resume/', views.download_resume, name='download_resume'),
 ]

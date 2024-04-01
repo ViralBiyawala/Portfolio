@@ -2,11 +2,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
-from .models import Intro, BlogEntry, Education, Skills, Certificate, Projects
+from .models import Intro, BlogEntry, Education, Skills, Certificate, Projects, Resume
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.http import JsonResponse
-from .forms import CertificateForm, ProjectsForm
+from .forms import CertificateForm, ProjectsForm, ResumeForm
 import json
 import os
 
@@ -31,6 +31,8 @@ def dashboard_view(request):
         intro.save()
         return redirect('index')
     
+    intro_split = intro.content.split('\n')
+    
     # print(superuser)
     allowed_extensions = ['jpg', 'jpeg', 'png']
 
@@ -53,6 +55,7 @@ def dashboard_view(request):
         'is_superuser': True,
         'link':src,
         'intro': intro,
+        'intro_split': intro_split,
         # 'editable': editable,
         'blog_entries': blog_entries,
     }
@@ -421,3 +424,30 @@ def delete_education_entry(request):
 def custom_logout(request):
     logout(request)
     return redirect('index')
+
+@csrf_exempt
+def upload_resume(request):
+    if request.method == 'POST':
+        form = ResumeForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Check if a resume entry already exists
+            if Resume.objects.exists():
+                resume = Resume.objects.first()
+                resume.resume_file = form.cleaned_data['resume_file']
+                resume.save()
+            else:
+                form.save()
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'errors': form.errors}, status=400)
+    else:
+        form = ResumeForm()
+    return render(request, 'upload_resume.html', {'form': form})
+
+@csrf_exempt
+def download_resume(request):
+    resume = Resume.objects.first()  # Assuming there's only one resume file
+    if resume:
+        return redirect(resume.resume_file.url)
+    else:
+        return JsonResponse({'error': 'Resume not found'}, status=404)

@@ -81,6 +81,19 @@ class Projects(models.Model):
                     if os.path.isfile(old_project.image.path):
                         os.remove(old_project.image.path)
         super().save(*args, **kwargs)
+        
+class Resume(models.Model):
+    resume_file = models.FileField(upload_to='static/files/resume/')
+
+    def save(self, *args, **kwargs):
+        if self.id:
+            try:
+                old_instance = Resume.objects.get(pk=self.id)
+                old_instance.resume_file.delete(save=False)
+            except Resume.DoesNotExist:
+                pass
+        super(Resume, self).save(*args, **kwargs)
+
 
 class Skills(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

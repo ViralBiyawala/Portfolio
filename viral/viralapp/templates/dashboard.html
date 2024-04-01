@@ -32,7 +32,7 @@
         <div id="blog-container">
             {% for entry in blog_entries %}
             <div class="blog-entry">
-                <h2>{{ entry.title }}</h2>
+                <h4>{{ entry.title }}</h4>
                 <p>{{ entry.content }}</p>
                 <button class="delete-btn" data-title="{{ entry.title }}" data-content="{{ entry.content }}">Delete</button>
             </div>

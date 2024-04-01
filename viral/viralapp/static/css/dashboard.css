@@ -337,6 +337,85 @@ hr {
     margin-top: -6rem;
 }
 
+.nolink{
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    box-sizing: border-box;
+    font-size: 0.8rem;
+    color: var(--secondary-text-color);
+    margin-bottom: 0.2rem;
+    padding-bottom: 0rem;
+}
+
+.nolink svg{
+    height: 22px;
+    width: 22px;
+    margin: 0rem;
+    padding: 0rem;
+}
+
+.nolink a{
+    text-decoration: none;
+    color : var(--primary-text-color);
+}
+
+.deco1 {
+    background-color:  rgba(255, 192, 203, 0.5);
+    width: fit-content;
+    padding: 0.4rem 0.7rem;
+    border-radius: 0.7rem;
+}
+
+.deco2{
+    background-color: rgba(173, 216, 230, 0.5); 
+    width: fit-content;
+    padding: 0.4rem 0.7rem;
+    border-radius: 0.7rem;
+    color : var(--primary-text-color);
+    
+}
+
+.project-group {
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+    /* text-decoration: underline; */
+}
+
+.projects {
+    display: none; /* Initially hide all project groups */
+}
+
+.select{
+    /* text-decoration: underline; */
+    background: linear-gradient(to right, orange, red);
+    padding: 0.4rem 0.7rem;
+    border-radius: 0.7rem;
+    box-sizing: border-box;
+}
+
+.projects.visi {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.btncol{
+    background: linear-gradient(to right, orange, red);
+    padding: 0.3rem 0.7rem;
+    border-radius: 2rem;
+    margin: 0.5rem 0rem;
+}
+
+#uploadForm{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
 /* Responsive Part */
 @media (min-width: 1030px) {
 
@@ -436,22 +515,4 @@ hr {
         display: flex;
         flex-direction: column;
     }
-}
-
-
-.project-group {
-    display: inline-block;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-.projects {
-    display: none; /* Initially hide all project groups */
-}
-
-.projects.visi {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    box-sizing: border-box;
 }
