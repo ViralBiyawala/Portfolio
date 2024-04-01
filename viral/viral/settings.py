@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-rn2lp4xq1!l^qdq1xf4x9%x$qzi#p4!pa^+a56xo_id+0&f45d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['192.168.43.119', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['192.168.43.119', '127.0.0.1', 'localhost','ViralBiyawala.pythonanywhere.com']
 
 
 
@@ -124,10 +124,10 @@ USE_TZ = True
 # settings.py
 
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = '/home/ViralBiyawala/Portfolio/viral/viralapp/static'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'viralapp/static'),
+    # os.path.join(BASE_DIR, 'viralapp/static'),
 ]
 
 
