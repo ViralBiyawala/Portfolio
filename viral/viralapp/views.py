@@ -36,10 +36,10 @@ def dashboard_view(request):
     # print(superuser)
     allowed_extensions = ['jpg', 'jpeg', 'png']
 
-    src = "../static/images/profile.jpg"
+    src = "../../media/images/profile.jpg"
     # Check if an image file exists for the user
     for extension in allowed_extensions:
-        image_path = f"viralapp/static/images/profile.{extension}"
+        image_path = f"media/images/profile.{extension}"
         if os.path.isfile(image_path) == True:
             src = f"images/profile.{extension}"
             break
@@ -70,13 +70,13 @@ def update_img(request):
             # Delete previous images with the same name but different extensions
             allowed_extensions = ['png', 'jpg', 'jpeg']
             for extension in allowed_extensions:
-                image_path = f"viralapp/static/images/profile.{extension}"
+                image_path = f"media/images/profile.{extension}"
                 if os.path.isfile(image_path):
                     os.remove(image_path)
 
             # Generate a secure filename based on User_id and the file extension
             filename = f"profile{os.path.splitext(image.name)[1]}"
-            image_path = os.path.join("viralapp/static/images", filename)
+            image_path = os.path.join("media/images", filename)
 
             # Ensure the directory exists
             os.makedirs(os.path.dirname(image_path), exist_ok=True)
@@ -119,10 +119,10 @@ def index(request):
     # print(superuser)
     allowed_extensions = ['jpg', 'jpeg', 'png']
 
-    src = "../static/images/profile.jpg"
+    src = "../../media/images/profile.jpg"
     # Check if an image file exists for the user
     for extension in allowed_extensions:
-        image_path = f"viralapp/static/images/profile.{extension}"
+        image_path = f"media/images/profile.{extension}"
         if os.path.isfile(image_path) == True:
             src = f"images/profile.{extension}"
             break
@@ -181,13 +181,13 @@ def education(request):
     # print(superuser)
     allowed_extensions = ['jpg', 'jpeg', 'png']
     
-    education_entries = Education.objects.filter(user=User.objects.filter(is_superuser=True).first())
+    education_entries = Education.objects.filter(user=User.objects.filter(is_superuser=True).first()).order_by('-display_order')
     skills_entries = Skills.objects.filter()
 
-    src = "../static/images/profile.jpg"
+    src = "../../media/images/profile.jpg"
     # Check if an image file exists for the user
     for extension in allowed_extensions:
-        image_path = f"viralapp/static/images/profile.{extension}"
+        image_path = f"media/images/profile.{extension}"
         if os.path.isfile(image_path) == True:
             src = f"images/profile.{extension}"
             break
@@ -243,10 +243,10 @@ def certification(request):
     # print(superuser)
     allowed_extensions = ['jpg', 'jpeg', 'png']
 
-    src = "../static/images/profile.jpg"
+    src = "../../media/images/profile.jpg"
     # Check if an image file exists for the user
     for extension in allowed_extensions:
-        image_path = f"viralapp/static/images/profile.{extension}"
+        image_path = f"media/images/profile.{extension}"
         if os.path.isfile(image_path) == True:
             src = f"images/profile.{extension}"
             break
@@ -329,10 +329,10 @@ def project(request):
     # print(superuser)
     allowed_extensions = ['jpg', 'jpeg', 'png']
 
-    src = "../static/images/profile.jpg"
+    src = "../../media/images/profile.jpg"
     # Check if an image file exists for the user
     for extension in allowed_extensions:
-        image_path = f"viralapp/static/images/profile.{extension}"
+        image_path = f"media/images/profile.{extension}"
         if os.path.isfile(image_path) == True:
             src = f"images/profile.{extension}"
             break
@@ -405,9 +405,10 @@ def add_education_entry(request):
         degree = request.POST.get('degree')
         school = request.POST.get('school')
         graduation_year = request.POST.get('graduation_year')
+        display_order = request.POST.get('display_order')
         
         # Associate the education entry with the current user
-        Education.objects.create(user=User.objects.filter(is_superuser=True).first(), degree=degree, school=school, graduation_year=graduation_year)
+        Education.objects.create(user=User.objects.filter(is_superuser=True).first(), degree=degree, school=school, graduation_year=graduation_year, display_order=display_order)
         # return JsonResponse({'message': 'Education entry added successfully'})
         return redirect('education')
 

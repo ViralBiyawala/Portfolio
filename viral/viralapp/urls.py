@@ -3,6 +3,8 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 # from .views import dashboard_view, update_img, index, education, certification, project, update_blog_entry, delete_blog_entry, add_education_entry, delete_education_entry, add_skill, del_skill, add_certificate
 
 urlpatterns = [
@@ -29,4 +31,8 @@ urlpatterns = [
     path('update_project/<int:pk>/', views.update_project, name='update_project'),
     path('upload_resume/', views.upload_resume, name='upload_resume'),
     path('download_resume/', views.download_resume, name='download_resume'),
+    # static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

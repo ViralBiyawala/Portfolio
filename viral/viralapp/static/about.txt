@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Noto Serif Gurmukhi
+- Font Author: Copyright 2022 The Noto Project Authors (https://github.com/notofonts/gurmukhi)
+- Font Source: https://fonts.gstatic.com/s/notoserifgurmukhi/v20/92z-tA9LNqsg7tCYlXdCV1VPnAEeDU0vLoYMbylXk0xTCr6-eRTNmqVU7y6l.ttf
+- Font License: SIL Open Font License, 1.1 (http://scripts.sil.org/OFL))

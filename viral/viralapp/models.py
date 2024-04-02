@@ -19,10 +19,24 @@ class Education(models.Model):
     degree = models.CharField(max_length=200)
     school = models.CharField(max_length=200)
     graduation_year = models.CharField(max_length=200)
+    display_order = models.IntegerField(default=0, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        # Check if there is any existing entry with the same display order
+        existing_entries = Education.objects.filter(display_order=self.display_order)
+        
+        if existing_entries.exists():
+            # Increment display_order for each entry after the new display order
+            for entry in existing_entries:
+                entry.display_order += 1
+                entry.save()  # Save each entry with updated display order
+        
+        super().save(*args, **kwargs)
+
 
 class Certificate(models.Model):
     title = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='static/images/certificate/')
+    image = models.ImageField(upload_to='certificate/')
     issued_by = models.CharField(max_length=100)
     date_awarded = models.DateField()
     expiry_date = models.DateField(blank=True, null=True)
@@ -54,9 +68,11 @@ class Certificate(models.Model):
                         os.remove(old_certificate.image.path)
         super().save(*args, **kwargs)
 
+from django.db import models
+
 class Projects(models.Model):
     title = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='static/images/project_images/')
+    image = models.ImageField(upload_to='project_images/')
     description = models.TextField()
     project_type = models.TextField(blank=True)
     code_link = models.URLField(blank=True)
@@ -81,9 +97,9 @@ class Projects(models.Model):
                     if os.path.isfile(old_project.image.path):
                         os.remove(old_project.image.path)
         super().save(*args, **kwargs)
-        
+
 class Resume(models.Model):
-    resume_file = models.FileField(upload_to='static/files/resume/')
+    resume_file = models.FileField(upload_to='files/resume/')
 
     def save(self, *args, **kwargs):
         if self.id:
