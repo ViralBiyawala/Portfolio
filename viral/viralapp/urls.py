@@ -32,7 +32,7 @@ urlpatterns = [
     path('upload_resume/', views.upload_resume, name='upload_resume'),
     path('download_resume/', views.download_resume, name='download_resume'),
     # static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

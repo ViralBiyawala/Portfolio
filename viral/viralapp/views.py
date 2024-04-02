@@ -36,12 +36,12 @@ def dashboard_view(request):
     # print(superuser)
     allowed_extensions = ['jpg', 'jpeg', 'png']
 
-    src = "../../media/images/profile.jpg"
+    src = "/media/images/profile.jpg"
     # Check if an image file exists for the user
     for extension in allowed_extensions:
-        image_path = f"media/images/profile.{extension}"
+        image_path = f"/media/images/profile.{extension}"
         if os.path.isfile(image_path) == True:
-            src = f"images/profile.{extension}"
+            src = f"/media/images/profile.{extension}"
             break
         
     # editable = False
@@ -70,16 +70,16 @@ def update_img(request):
             # Delete previous images with the same name but different extensions
             allowed_extensions = ['png', 'jpg', 'jpeg']
             for extension in allowed_extensions:
-                image_path = f"media/images/profile.{extension}"
+                image_path = f"/media/images/profile.{extension}"
                 if os.path.isfile(image_path):
                     os.remove(image_path)
 
             # Generate a secure filename based on User_id and the file extension
             filename = f"profile{os.path.splitext(image.name)[1]}"
-            image_path = os.path.join("media/images", filename)
+            image_path = os.path.join("/home/ViralBiyawala/Portfolio/viral/media/images", filename)
 
             # Ensure the directory exists
-            os.makedirs(os.path.dirname(image_path), exist_ok=True)
+            # os.makedirs(os.path.dirname(image_path), exist_ok=True)
 
             # Save the uploaded image with the User_id as the filename
             with open(image_path, 'wb') as destination:
@@ -119,12 +119,12 @@ def index(request):
     # print(superuser)
     allowed_extensions = ['jpg', 'jpeg', 'png']
 
-    src = "../../media/images/profile.jpg"
+    src = "/media/images/profile.jpg"
     # Check if an image file exists for the user
     for extension in allowed_extensions:
-        image_path = f"media/images/profile.{extension}"
+        image_path = f"/media/images/profile.{extension}"
         if os.path.isfile(image_path) == True:
-            src = f"images/profile.{extension}"
+            src = f"/media/images/profile.{extension}"
             break
         
     # editable = False
@@ -184,12 +184,12 @@ def education(request):
     education_entries = Education.objects.filter(user=User.objects.filter(is_superuser=True).first()).order_by('-display_order')
     skills_entries = Skills.objects.filter()
 
-    src = "../../media/images/profile.jpg"
+    src = "/media/images/profile.jpg"
     # Check if an image file exists for the user
     for extension in allowed_extensions:
-        image_path = f"media/images/profile.{extension}"
+        image_path = f"/media/images/profile.{extension}"
         if os.path.isfile(image_path) == True:
-            src = f"images/profile.{extension}"
+            src = f"/media/images/profile.{extension}"
             break
         
     # editable = False
@@ -243,12 +243,12 @@ def certification(request):
     # print(superuser)
     allowed_extensions = ['jpg', 'jpeg', 'png']
 
-    src = "../../media/images/profile.jpg"
+    src = "/media/images/profile.jpg"
     # Check if an image file exists for the user
     for extension in allowed_extensions:
-        image_path = f"media/images/profile.{extension}"
+        image_path = f"/media/images/profile.{extension}"
         if os.path.isfile(image_path) == True:
-            src = f"images/profile.{extension}"
+            src = f"/media/images/profile.{extension}"
             break
     
     # editable = False
@@ -329,12 +329,12 @@ def project(request):
     # print(superuser)
     allowed_extensions = ['jpg', 'jpeg', 'png']
 
-    src = "../../media/images/profile.jpg"
+    src = "/media/images/profile.jpg"
     # Check if an image file exists for the user
     for extension in allowed_extensions:
-        image_path = f"media/images/profile.{extension}"
+        image_path = f"/media/images/profile.{extension}"
         if os.path.isfile(image_path) == True:
-            src = f"images/profile.{extension}"
+            src = f"/media/images/profile.{extension}"
             break
         
     # editable = False

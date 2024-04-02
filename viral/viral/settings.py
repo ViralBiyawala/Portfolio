@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-rn2lp4xq1!l^qdq1xf4x9%x$qzi#p4!pa^+a56xo_id+0&f45d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['192.168.43.119', '127.0.0.1', 'localhost','ViralBiyawala.pythonanywhere.com']
 
@@ -127,15 +127,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/ViralBiyawala/Portfolio/viral/viralapp/static'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'viralapp/static'),
-]
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'viralapp/static'),
+# ]
 
 
 # Define the media URL
 # MEDIA_URL = 'images/'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = MEDIA_ROOT = '/home/ViralBiyawala/Portfolio/viral/media/'
 
 
 # Default primary key field type
