@@ -89,8 +89,10 @@ hr {
 }
 
 .job{
-    font-size: small;
+    font-size: 16px;
+    margin: 0.2rem 0rem;
     margin-bottom: 0.1rem;
+    font-weight: 700;
 }
 
 #setting{
@@ -101,12 +103,12 @@ hr {
 /* Right Side */
 .content {
     box-sizing: border-box;
-    padding: 0px 20px;
+    padding: 8px 20px;
 }
 
 .main-content {
     margin: 1.45rem 0rem;
-    border: 0.1rem solid var(--profile-border-color);
+    border: 0.2rem solid var(--profile-border-color);
     border-radius: 1rem;
     box-shadow: 0rem 0rem 1rem var(--box-shadow-color);
     background-color: var(--box-color);
@@ -161,7 +163,7 @@ hr {
 }
 
 .blog-entry {
-    width: 48%; 
+    width: 48%;
     margin: 0.5rem 0rem 0.5rem 0rem;
     padding: 1rem;
     border-radius: 1rem;
@@ -203,11 +205,11 @@ hr {
 }
 
 .education-entry::before {
-    content: ''; 
+    content: '';
     transform: translateY(50%);
-    width: 12px; 
-    height: 12px; 
-    border-radius: 50%; 
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
     background: linear-gradient(135deg, orange, red);
     margin-left: -6px;
 }
@@ -253,13 +255,14 @@ hr {
 }
 
 .certificate-blog {
-    width: 48%; 
+    width: 48%;
     padding: 0.6rem 0.6rem;
     border-radius: 1rem;
     text-align: left;
     border: 1px solid var(--profile-border-color);
     overflow: hidden;
     margin: 1rem 0rem;
+    text-align: justify;
 }
 
 .row1 {
@@ -280,10 +283,10 @@ hr {
 
 .certificate-title {
     font-weight: bold;
-    margin: 0rem 1rem; 
-    flex: 1; 
+    margin: 0rem 1rem;
+    flex: 1;
     display: flex;
-    align-items: center; 
+    align-items: center;
     justify-content: center;
     text-align: center;
 }
@@ -297,10 +300,10 @@ hr {
 .certificate-issued-by {
     /* font-style: italic; */
     font-weight: bolder;
-    margin: 0rem;
-    margin-bottom: 0.2rem;
-    padding: 0rem;
-    font-size: 1rem;
+    margin: 0.7rem 0rem;
+    /*margin-bottom: 0.2rem;*/
+    padding: 0.3rem 0.1rem;
+    font-size: 0.85rem;
 }
 
 .certificate-dates {
@@ -369,12 +372,12 @@ hr {
 }
 
 .deco2{
-    background-color: rgba(173, 216, 230, 0.5); 
+    background-color: rgba(173, 216, 230, 0.5);
     width: fit-content;
     padding: 0.4rem 0.7rem;
     border-radius: 0.7rem;
     color : var(--primary-text-color);
-    
+
 }
 
 .project-group {
@@ -452,13 +455,13 @@ hr {
         width: 55%;
     }
     .blog-entry {
-        width: 100%; 
+        width: 100%;
     }
 
     .certificate-blog {
-        width: 100%; 
+        width: 100%;
     }
-    
+
     .row1 {
         flex-direction: column; /* Display items vertically */
         align-items: center; /* Horizontally center */
@@ -495,11 +498,11 @@ hr {
     }
 
     .blog-entry {
-        width: 100%; 
+        width: 100%;
     }
 
     .certificate-blog {
-        width: 100%; 
+        width: 100%;
     }
 
     .row1 {

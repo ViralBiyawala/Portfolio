@@ -2,7 +2,13 @@
 <html>
 
 <head>
-    <title>Login</title>
+    <title>Viral Biyawala | Login</title>
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'site.webmanifest' %}">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -55,8 +61,22 @@
             cursor: pointer;
         }
 
+        .form-group-2 button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ffa500;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
         .form-group button:hover {
             background-color: #45a049;
+        }
+
+        .form-group-2 button:hover {
+            background-color: #ff4500;
         }
     </style>
 </head>
@@ -78,7 +98,15 @@
                 <button type="submit">Login</button>
             </div>
         </form>
+    <div class="form-group-2">
+        <button onclick="redirectToHomePage()">Go to Home Page</button>
     </div>
 </body>
+    </div>
+    <script>
+        function redirectToHomePage() {
+            window.location.href = "/index/";
+        }
+    </script>
 
 </html>

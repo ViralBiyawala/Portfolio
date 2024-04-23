@@ -22,17 +22,17 @@ def dashboard_view(request):
 
     # Get the theme preference from the session or default to 'light'
     theme_preference = request.session.get('theme_preference', 'light')
-    
+
     intro, created = Intro.objects.get_or_create(pk=1)
-    
+
     if request.method == 'POST':
         content = request.POST.get('content', '')
         intro.content = content
         intro.save()
         return redirect('index')
-    
+
     intro_split = intro.content.split('\n')
-    
+
     # print(superuser)
     allowed_extensions = ['jpg', 'jpeg', 'png']
 
@@ -43,12 +43,12 @@ def dashboard_view(request):
         if os.path.isfile(image_path) == True:
             src = f"/media/images/profile.{extension}"
             break
-        
+
     # editable = False
     # editable = True
-    
+
     blog_entries = BlogEntry.objects.all()
-    
+
     context = {
         'theme_preference': theme_preference,
         'user': superuser,
@@ -105,17 +105,17 @@ def index(request):
 
     # Get the theme preference from the session or default to 'light'
     theme_preference = request.session.get('theme_preference', 'light')
-    
+
     intro, created = Intro.objects.get_or_create(pk=1)
-    
+
     if request.method == 'POST':
         content = request.POST.get('content', '')
         intro.content = content
         intro.save()
         return redirect('index')
-    
+
     intro_split = intro.content.split('\n')
-    
+
     # print(superuser)
     allowed_extensions = ['jpg', 'jpeg', 'png']
 
@@ -126,12 +126,12 @@ def index(request):
         if os.path.isfile(image_path) == True:
             src = f"/media/images/profile.{extension}"
             break
-        
+
     # editable = False
     # editable = True
-    
+
     blog_entries = BlogEntry.objects.all()
-    
+
     context = {
         'theme_preference': theme_preference,
         'user': superuser,
@@ -177,10 +177,10 @@ def education(request):
 
     # Get the theme preference from the session or default to 'light'
     theme_preference = request.session.get('theme_preference', 'light')
-    
+
     # print(superuser)
     allowed_extensions = ['jpg', 'jpeg', 'png']
-    
+
     education_entries = Education.objects.filter(user=User.objects.filter(is_superuser=True).first()).order_by('-display_order')
     skills_entries = Skills.objects.filter()
 
@@ -191,10 +191,10 @@ def education(request):
         if os.path.isfile(image_path) == True:
             src = f"/media/images/profile.{extension}"
             break
-        
+
     # editable = False
     # editable = True
-    
+
     context = {
         'theme_preference': theme_preference,
         'user': superuser,
@@ -216,7 +216,7 @@ def add_skill(request):
             # Check if the skill already exists for the user
             if not Skills.objects.filter(user=User.objects.filter(is_superuser=True).first(), skills_list__iexact=skill_name).exists():
                 Skills.objects.create(user=User.objects.filter(is_superuser=True).first(),skills_list=skill_name)
-    return redirect('education')  
+    return redirect('education')
 
 @csrf_exempt
 def del_skill(request):
@@ -225,7 +225,7 @@ def del_skill(request):
         if skill_name and Skills.objects.filter(user=User.objects.filter(is_superuser=True).first(),skills_list__iexact=skill_name):
             # Delete the skill entry if it exists for the user
             Skills.objects.filter(user=User.objects.filter(is_superuser=True).first(),skills_list__iexact=skill_name).delete()
-    return redirect('education')  
+    return redirect('education')
 
 def certification(request):
 # Get the superuser directly
@@ -239,7 +239,7 @@ def certification(request):
 
     # Get the theme preference from the session or default to 'light'
     theme_preference = request.session.get('theme_preference', 'light')
-    
+
     # print(superuser)
     allowed_extensions = ['jpg', 'jpeg', 'png']
 
@@ -250,12 +250,12 @@ def certification(request):
         if os.path.isfile(image_path) == True:
             src = f"/media/images/profile.{extension}"
             break
-    
+
     # editable = False
     # editable = True
-    
+
     certificates = Certificate.objects.all().order_by('display_order')
-    
+
     context = {
         'theme_preference': theme_preference,
         'user': superuser,
@@ -274,13 +274,13 @@ def add_certificate(request):
         if form.is_valid():
             certificate = form.save(commit=False)
             new_display_order = certificate.display_order
-            
+
             # Adjust display order of existing certificates
             certificates_to_adjust = Certificate.objects.filter(display_order__gte=new_display_order)
             for cert in certificates_to_adjust:
                 cert.display_order += 1
                 cert.save()
-            
+
             certificate.save()
             return JsonResponse({'success': True})
         else:
@@ -300,13 +300,13 @@ def update_certificate(request, pk):
         if form.is_valid():
             certificate = form.save(commit=False)
             new_display_order = certificate.display_order
-            
+
             # Adjust display order of existing certificates
             certificates_to_adjust = Certificate.objects.filter(display_order__gte=new_display_order)
             for cert in certificates_to_adjust:
                 cert.display_order += 1
                 cert.save()
-            
+
             certificate.save()
             return JsonResponse({'success': True})
         else:
@@ -325,7 +325,7 @@ def project(request):
 
     # Get the theme preference from the session or default to 'light'
     theme_preference = request.session.get('theme_preference', 'light')
-    
+
     # print(superuser)
     allowed_extensions = ['jpg', 'jpeg', 'png']
 
@@ -336,12 +336,12 @@ def project(request):
         if os.path.isfile(image_path) == True:
             src = f"/media/images/profile.{extension}"
             break
-        
+
     # editable = False
     # editable = True
-    
+
     all_projects = Projects.objects.all().order_by('display_order')
-    
+
     context = {
         'theme_preference': theme_preference,
         'user': superuser,
@@ -359,13 +359,13 @@ def add_project(request):
         if form.is_valid():
             Projectfr = form.save(commit=False)
             new_display_order = Projectfr.display_order
-            
+
             # Adjust display order of existing Projectss
             Projectss_to_adjust = Projects.objects.filter(display_order__gte=new_display_order)
             for pro in Projectss_to_adjust:
                 pro.display_order += 1
                 pro.save()
-            
+
             Projectfr.save()
             return JsonResponse({'success': True})
         else:
@@ -385,13 +385,13 @@ def update_project(request, pk):
         if form.is_valid():
             project = form.save(commit=False)
             new_display_order = project.display_order
-            
+
             # Adjust display order of existing certificates
             project_to_adjust = Projects.objects.filter(display_order__gte=new_display_order)
             for pro in project_to_adjust:
                 pro.display_order += 1
                 pro.save()
-            
+
             project.save()
             return JsonResponse({'success': True})
         else:
@@ -406,7 +406,7 @@ def add_education_entry(request):
         school = request.POST.get('school')
         graduation_year = request.POST.get('graduation_year')
         display_order = request.POST.get('display_order')
-        
+
         # Associate the education entry with the current user
         Education.objects.create(user=User.objects.filter(is_superuser=True).first(), degree=degree, school=school, graduation_year=graduation_year, display_order=display_order)
         # return JsonResponse({'message': 'Education entry added successfully'})
@@ -452,3 +452,6 @@ def download_resume(request):
         return redirect(resume.resume_file.url)
     else:
         return JsonResponse({'error': 'Resume not found'}, status=404)
+
+def custom_404(request, exception):
+    return render(request, '404.html', status=404)

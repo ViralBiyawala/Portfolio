@@ -52,7 +52,7 @@
         </form>
     </div>
 
-    {% regroup all_projects by project_type as project_types %}
+    {% regroup all_projects|dictsort:"project_type" by project_type as project_types %}
     <!-- Display project groups horizontally -->
     <div class="project-groups">
         <div class="project-group select" data-group="all">All</div>
@@ -105,7 +105,7 @@
                     <a href="{{ project.live_link }}" target="_blank">Live Link</a>
                 </span>
                 {% else %}
-                <span class="deco2">Not Available</span>
+                <span class="deco2">N/A</span>
                 {% endif %}
                 {% if project.code_link %}
                 <span class="deco1">
