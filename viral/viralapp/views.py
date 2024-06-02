@@ -48,6 +48,7 @@ def dashboard_view(request):
     # editable = True
 
     blog_entries = BlogEntry.objects.all()
+    mark = 'promark'
 
     context = {
         'theme_preference': theme_preference,
@@ -56,6 +57,7 @@ def dashboard_view(request):
         'link':src,
         'intro': intro,
         'intro_split': intro_split,
+        # 'mark': mark,
         # 'editable': editable,
         'blog_entries': blog_entries,
     }
@@ -131,6 +133,8 @@ def index(request):
     # editable = True
 
     blog_entries = BlogEntry.objects.all()
+    
+    mark = 'promark'
 
     context = {
         'theme_preference': theme_preference,
@@ -139,6 +143,7 @@ def index(request):
         'link':src,
         'intro': intro,
         'intro_split': intro_split,
+        'mark': mark,
         # 'editable': editable,
         'blog_entries': blog_entries,
     }
@@ -194,12 +199,14 @@ def education(request):
 
     # editable = False
     # editable = True
+    mark = 'promark'
 
     context = {
         'theme_preference': theme_preference,
         'user': superuser,
         'is_superuser': True,
         'link':src,
+        'mark': mark,
         'education_entries': education_entries,
         # 'editable': editable,
         'skills_entries': skills_entries,
@@ -255,6 +262,7 @@ def certification(request):
     # editable = True
 
     certificates = Certificate.objects.all().order_by('display_order')
+    mark = 'promark'
 
     context = {
         'theme_preference': theme_preference,
@@ -262,6 +270,7 @@ def certification(request):
         'is_superuser': True,
         'link':src,
         'certificates': certificates,
+        'mark': mark,
         # 'editable': editable,
     }
 
@@ -341,12 +350,14 @@ def project(request):
     # editable = True
 
     all_projects = Projects.objects.all().order_by('display_order')
+    mark = 'promark'
 
     context = {
         'theme_preference': theme_preference,
         'user': superuser,
         'is_superuser': True,
         'link':src,
+        'mark': mark,
         # 'editable': editable,
         'all_projects': all_projects,
     }

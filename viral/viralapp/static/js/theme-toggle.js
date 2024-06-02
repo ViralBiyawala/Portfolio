@@ -411,6 +411,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const projects = document.querySelectorAll('.projects');
             projects.forEach(project => {
                 if (project.id === groupId) {
+                    // console.log(dropName);
                     project.classList.toggle('visi');
                 } else {
                     project.classList.remove('visi');
@@ -419,6 +420,39 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+if(document.getElementsByClassName("but-drop")[0]){
+    const groups = document.querySelectorAll('.project-group-drop');
+    groups.forEach(group => {
+        group.addEventListener('click', function () {
+            // console.log();
+            // this.classList.toggle('select')
+            const groupId = this.getAttribute('data-group');
+            groups.forEach(groupins => {
+                if(groupins.getAttribute('data-group') == groupId){
+                    // console.log(groupId);
+                    group.classList.toggle('select');
+                }
+                else{
+                    groupins.classList.remove('select');
+                }
+            });
+            const projects = document.querySelectorAll('.projects');
+            projects.forEach(project => {
+                if (project.id === groupId) {
+                    if(document.getElementsByClassName("but-drop")[0]){
+                        let dropName = document.getElementsByClassName("but-drop")[0];
+                        dropName.innerHTML = groupId;
+                    }
+                    // console.log(dropName);
+                    project.classList.toggle('visi');
+                } else {
+                    project.classList.remove('visi');
+                }
+            });
+        });
+    });
+};
 
 
 // Upload Resume

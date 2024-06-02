@@ -424,6 +424,15 @@ hr {
 }
 
 /* Responsive Part */
+.drop-small{
+    display: none;
+}
+
+.drop-big{
+    display: block;
+}
+
+/* Responsive Part */
 @media (min-width: 1030px) {
 
     /* Medium screen and above */
@@ -458,6 +467,7 @@ hr {
     .content {
         width: 55%;
     }
+
     .blog-entry {
         width: 100%;
     }
@@ -467,11 +477,13 @@ hr {
     }
 
     .row1 {
-        flex-direction: column; /* Display items vertically */
-        align-items: center; /* Horizontally center */
+        flex-direction: column;
+        /* Display items vertically */
+        align-items: center;
+        /* Horizontally center */
     }
 
-    .certificate-title{
+    .certificate-title {
         margin: 0.1rem 0rem;
     }
 }
@@ -495,6 +507,7 @@ hr {
         margin: 0rem;
         bottom: 1rem;
         width: 88%;
+        z-index:1051
     }
 
     .main-content {
@@ -510,16 +523,83 @@ hr {
     }
 
     .row1 {
-        flex-direction: column; /* Display items vertically */
-        align-items: center; /* Horizontally center */
+        flex-direction: column;
+        /* Display items vertically */
+        align-items: center;
+        /* Horizontally center */
     }
 
-    .certificate-title{
+    .certificate-title {
         margin: 0.1rem 0rem;
     }
 
-    .certificate-dates{
+    .certificate-dates {
         display: flex;
         flex-direction: column;
     }
+
+    .drop-small{
+        display: block;
+    }
+
+    .drop-big{
+        display: none;
+    }
+
+    .projects {
+        display: none;
+        /* Initially hide all project groups */
+    }
+
+    .select {
+        background: linear-gradient(to right, orange, red);
+        color: white;
+        border-radius: 0.0rem;
+    }
+
+    .dropdown-divider {
+        margin: 0rem;
+        border: 0.01em solid rgb(0, 0, 0);
+    }
+    .btn-group {
+        color: white;
+        width: 90%;
+    }
+
+    /* Custom CSS to match the dropdown menu width with the button width */
+    .dropdown-menu {
+        /* color: white; */
+        width: 100%;
+        padding: 0cm;
+    }
+
+    .project-group-drop:hover {
+        background: linear-gradient(to right, rgb(252, 187, 68), rgb(253, 70, 70));
+    }
+
+    .project-group-drop {
+        display: block;
+        /* margin-right: 10px; */
+        cursor: pointer;
+        text-align: center;
+        padding: 0.3rem 0rem;
+        /* padding: 0.2rem 0.2rem; */
+        /* text-decoration: underline; */
+    }
+
+    .but-drop {
+        background: linear-gradient(to right, orange, red);
+        color: white;
+    }
+
+    .but-drop:hover {
+        color: white;
+    }
+
 }
+/* 
+@media (max-width: 452px) {
+    .btn-group {
+        width: 70vw;
+    }
+} */

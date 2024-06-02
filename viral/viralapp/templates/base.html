@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Viral Biyawala | {% block title %} {% endblock %} </title>
     <meta name="description" content="Welcome to Viral Biyawala's Portfolio">
-    <meta name="keywords" content="Viral Biyawala, Viral Biyawala portfolio, Viral Biyawala education, Viral Biyawala certificate, Viral Biyawala projects">
+    <meta name="keywords"
+        content="Viral Biyawala, Viral Biyawala portfolio, Viral Biyawala education, Viral Biyawala certificate, Viral Biyawala projects">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Include Font Awesome -->
@@ -349,8 +350,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="{% static 'js/theme-toggle.js' %}"></script>
+    <script>
+        // var link = "{{ mark }}"
+        // alert(link);
+        document.addEventListener("DOMContentLoaded", function () {
+            var fragment = "{{ mark }}";
+            if (fragment) {
+                window.location.hash = fragment;
+                setTimeout(function () {
+                    window.scrollBy(0, -200);
+                }, 1);
+            }
+        });
+    </script>
     <!-- Your custom scripts -->
-    {% block extra_js %}{% endblock %}
+    {% block extra_js %}
+    {% endblock %}
 </body>
 
 </html>
