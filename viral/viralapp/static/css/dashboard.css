@@ -13,7 +13,7 @@
   }
   
   .custom-scrollbar::-webkit-scrollbar-track {
-    background-color: #bfe3f7;
+    background-color: var(--background-color);
     margin-left: 10px;
   }
 
@@ -178,7 +178,7 @@ hr {
     justify-content: space-between;
     box-sizing: border-box;
     max-height: 52rem;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .blog-entry {
@@ -414,8 +414,9 @@ hr {
 
 .projects {
     display: none; /* Initially hide all project groups */
+    margin-top: 1rem;
     max-height: 52rem;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .select{
