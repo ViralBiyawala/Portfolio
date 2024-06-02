@@ -1,4 +1,21 @@
 /* dashboard.css */
+/* scrool bar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px; 
+    height: 6px; 
+    margin-top: 20px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(to top, orange, rgb(248, 130, 27), red);
+    border-radius: 5px;
+    margin-left: 10px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background-color: #bfe3f7;
+    margin-left: 10px;
+  }
 
 /* Left Side */
 .personal-info-box {
@@ -160,10 +177,12 @@ hr {
     flex-wrap: wrap;
     justify-content: space-between;
     box-sizing: border-box;
+    max-height: 52rem;
+    overflow-y: scroll;
 }
 
 .blog-entry {
-    width: 48%;
+    width: 38%;
     margin: 0.5rem 0rem 0.5rem 0rem;
     padding: 1rem;
     border-radius: 1rem;
@@ -255,7 +274,7 @@ hr {
 }
 
 .certificate-blog {
-    width: 48%;
+    width: 47%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -264,7 +283,9 @@ hr {
     text-align: left;
     border: 1px solid var(--profile-border-color);
     overflow: hidden;
-    margin: 1rem 0rem;
+    margin: 1rem 0.5rem;
+    /* margin-right: 1rem; */
+    /* margin-right: 2rem; */
     text-align: justify;
 }
 
@@ -393,6 +414,8 @@ hr {
 
 .projects {
     display: none; /* Initially hide all project groups */
+    max-height: 52rem;
+    overflow-y: scroll;
 }
 
 .select{
