@@ -278,12 +278,12 @@ hr {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 0.6rem 0.6rem;
+    padding: 0.6rem 0.5rem;
     border-radius: 1rem;
     text-align: left;
     border: 1px solid var(--profile-border-color);
     overflow: hidden;
-    margin: 1rem 0.5rem;
+    margin: 1rem 0.3rem;
     /* margin-right: 1rem; */
     /* margin-right: 2rem; */
     text-align: justify;
