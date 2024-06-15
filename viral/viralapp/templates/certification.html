@@ -56,49 +56,53 @@
         <div class="certificate-blog">
             {% if certificate.link and not editable%}
             <a href="{{ certificate.link }}" target="_blank">
+                {% endif %}
+                <div class="row1">
+                    <img src="{{ certificate.image.url }}" alt="{{ certificate.title }}" class="certificate-image">
+                    <p class="certificate-title">{{ certificate.title }}</p>
+                </div>
+                {% if editable %}
+                <!-- Edit button -->
+                <button class="edit-certificate-btn" data-certificate-id="{{ certificate.pk }}">Edit</button>
+
+                <!-- Input fields for editing -->
+                <div id="edit_form_{{ certificate.pk }}" style="display: none;">
+                    <input type="text" id="edit_title_by_{{ certificate.pk }}" value="{{ certificate.title }}"><br>
+                    <input type="file" id="edit_image_{{ certificate.pk }}" name="image"
+                        value="{{ certificate.image }}"><br>
+                    <p>Link: </p><input type="text" id="edit_link_by_{{ certificate.pk }}"
+                        value="{{ certificate.link }}">
+                    <p>Issued by: </p><input type="text" id="edit_issued_by_{{ certificate.pk }}"
+                        value="{{ certificate.issued_by }}">
+                    <p>Date Awarded: </p><input type="date" id="edit_date_awarded_{{ certificate.pk }}"
+                        value="{{ certificate.date_awarded|date:'Y-m-d' }}">
+                    <p>Expiry Date: </p><input type="date" id="edit_expiry_date_{{ certificate.pk }}"
+                        value="{% if certificate.expiry_date %}{{ certificate.expiry_date|date:'Y-m-d' }}{% endif %}">
+                    <p>Display Order: </p><input type="number" id="edit_display_order_{{ certificate.pk }}"
+                        value="{{ certificate.display_order }}">
+                    <p>Skills Gained: </p><textarea
+                        id="edit_skills_gained_{{ certificate.pk }}">{{ certificate.skills_gained }}</textarea>
+                    <button class="save-edit-btn" data-certificate-id="{{ certificate.pk }}">Save</button>
+                </div>
+                <a href="{% url 'delete_certificate' certificate.pk %}">Delete</a>
+
+                {% else %}
+                <p class="certificate-issued-by">{{ certificate.issued_by }}</p>
+                <div class="certificate-dates">
+                    <span>Issued: {{ certificate.date_awarded }}</span>
+                    {% if certificate.expiry_date %} <span>Expiry: {{ certificate.expiry_date }} </span> {% endif %}
+                </div>
+                {% endif %}
+                {% if certificate.link and not editable%}
+            </a>
             {% endif %}
-            <div class="row1">
-                <img src="{{ certificate.image.url }}" alt="{{ certificate.title }}" class="certificate-image">
-                <p class="certificate-title">{{ certificate.title }}</p>
-            </div>
-            {% if editable %}
-            <!-- Edit button -->
-            <button class="edit-certificate-btn" data-certificate-id="{{ certificate.pk }}">Edit</button>
-
-            <!-- Input fields for editing -->
-            <div id="edit_form_{{ certificate.pk }}" style="display: none;">
-                <input type="text" id="edit_title_by_{{ certificate.pk }}" value="{{ certificate.title }}"><br>
-                <input type="file" id="edit_image_{{ certificate.pk }}" name="image" value="{{ certificate.image }}"><br>
-                <p>Link: </p><input type="text" id="edit_link_by_{{ certificate.pk }}"
-                    value="{{ certificate.link }}">
-                <p>Issued by: </p><input type="text" id="edit_issued_by_{{ certificate.pk }}"
-                    value="{{ certificate.issued_by }}">
-                <p>Date Awarded: </p><input type="date" id="edit_date_awarded_{{ certificate.pk }}"
-                    value="{{ certificate.date_awarded|date:'Y-m-d' }}">
-                <p>Expiry Date: </p><input type="date" id="edit_expiry_date_{{ certificate.pk }}"
-                    value="{% if certificate.expiry_date %}{{ certificate.expiry_date|date:'Y-m-d' }}{% endif %}">
-                <p>Display Order: </p><input type="number" id="edit_display_order_{{ certificate.pk }}"
-                    value="{{ certificate.display_order }}">
-                <p>Skills Gained: </p><textarea id="edit_skills_gained_{{ certificate.pk }}">{{ certificate.skills_gained }}</textarea>
-                <button class="save-edit-btn"
-                    data-certificate-id="{{ certificate.pk }}">Save</button>
-            </div>
-            <a href="{% url 'delete_certificate' certificate.pk %}">Delete</a>
-
-            {% else %}
-            <p class="certificate-issued-by">{{ certificate.issued_by }}</p>
-            <div class="certificate-dates">
-                <span>Issued on {{ certificate.date_awarded }}</span>
-                {% if certificate.expiry_date %} <span>Expiry on {{ certificate.expiry_date }} </span>  {% endif %}
-            </div>
-            <div class="certificate-skills">
-                {% for skill in certificate.get_skills %} 
-                <span class="skill">{{ skill }}</span>
-                {% endfor %}</div>
-            {% endif %}  
-        {% if certificate.link and not editable%}
-        </a>  
-        {% endif %}
+            {% if not editable %}
+                <div class="certificate-skills">
+                    {% for skill in certificate.get_skills %}
+                    <span class="skill">{{ skill }}</span>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         {% endfor %}
     </div>

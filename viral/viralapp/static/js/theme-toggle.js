@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // blogEntry.appendChild(deleteBtn);
 
             // Append the blog entry container to the blog container
-            document.getElementById('blog-container').appendChild(blogEntry);
+            document.getElementById('blog-container2').appendChild(blogEntry);
         }
 
         // Function to update a blog entry

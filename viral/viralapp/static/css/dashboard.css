@@ -173,20 +173,26 @@ hr {
 }
 
 #blog-container {
+    box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+}
+
+#blog-container2 {
     box-sizing: border-box;
-    max-height: 52rem;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .blog-entry {
-    width: 47%;
-    margin: 0.5rem 0rem 0.5rem 0rem;
-    padding: 1rem;
+    margin: 0.7rem 0rem 0.7rem 0rem;
+    padding: 1rem 1rem 0.2rem 1rem;
     border-radius: 1rem;
-    text-align: left;
+    text-align: justify;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-between; */
 }
 
 .blog-entry h4{
@@ -195,7 +201,7 @@ hr {
 
 /* Styling for even blog entries */
 .blog-entry:nth-child(even) {
-    background-color: rgba(255, 192, 203, 0.5); /* Pink with transparency */
+    background-color: rgb(255, 204, 146); /* Pink with transparency */
 }
 
 /* Styling for odd blog entries */
@@ -341,8 +347,10 @@ hr {
 }
 
 .certificate-skills {
+    position: relative;
     font-size: 0.9rem;
-    margin-bottom: 0.1rem;
+    /* margin-bottom: 0.1rem; */
+    bottom: 0rem;
 }
 
 

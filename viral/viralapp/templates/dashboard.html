@@ -29,7 +29,7 @@
         <!-- Plus button to add new blog entries -->
         <button id="add-blog-btn">Add Blog</button>
         <!-- Container for blog entries -->
-        <div id="blog-container">
+        <div id="blog-container2">
             {% for entry in blog_entries %}
             <div class="blog-entry">
                 <h4>{{ entry.title }}</h4>
@@ -46,7 +46,7 @@
     {% endfor %}
     </div>
     <h3 class="subhead">What I Do!</h3>
-    <div id="blog-container">
+    <div id="blog-container2">
         {% for entry in blog_entries %}
         <div class="blog-entry" >
             <h4>{{ entry.title }}</h4>

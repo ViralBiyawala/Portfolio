@@ -84,7 +84,6 @@
         </div>
         {% endfor %}
     </div>
-    <!-- <div id="blog-container"> -->
 
 
     <!-- Display all projects -->
@@ -189,7 +188,7 @@
 
 
     {% for project_type in project_types %}
-    <div class="projects" id="{{ project_type.grouper }}">
+    <div class="projects custom-scrollbar" id="{{ project_type.grouper }}">
         {% for project in project_type.list %}
         <div class="certificate-blog">
             <div class="row1">
@@ -241,7 +240,7 @@
                     <a href="{{ project.live_link }}" target="_blank">Live Link</a>
                 </span>
                 {% else %}
-                <span class="deco2">Not Available</span>
+                <span class="deco2">N/A</span>
                 {% endif %}
                 {% if project.code_link %}
                 <span class="deco1">
