@@ -465,6 +465,10 @@ hr {
     display: block;
 }
 
+.btn-focus{
+    box-shadow: none;
+}
+
 /* Responsive Part */
 @media (min-width: 1030px) {
 
