@@ -318,7 +318,7 @@ hr {
     font-weight: bold;
     margin: 0.4rem 0rem;
     margin-bottom: 1rem;
-    flex: 1;
+    /* flex: 1; */
     /* display: flex; */
     align-items: center;
     justify-content: center;
@@ -334,7 +334,8 @@ hr {
 .certificate-issued-by {
     /* font-style: italic; */
     font-weight: bolder;
-    margin: 1rem 0rem;
+    margin: 0.3rem 0rem;
+    margin-top: 1.3rem;
     /*margin-bottom: 0.2rem;*/
     padding: 0.3rem 0.1rem;
     font-size: 0.85rem;
