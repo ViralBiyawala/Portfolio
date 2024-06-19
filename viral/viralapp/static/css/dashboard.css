@@ -317,7 +317,7 @@ hr {
 .certificate-title {
     font-weight: bold;
     margin: 0.4rem 0rem;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -333,7 +333,7 @@ hr {
     /* font-style: italic; */
     font-weight: bolder;
     margin: 0.3rem 0rem;
-    margin-top: 1.3rem;
+    /* margin-top: 1rem; */
     /*margin-bottom: 0.2rem;*/
     padding: 0.3rem 0.1rem;
     font-size: 0.85rem;
