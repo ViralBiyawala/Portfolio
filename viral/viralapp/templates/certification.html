@@ -59,8 +59,8 @@
                 {% endif %}
                 <div class="row1">
                     <img src="{{ certificate.image.url }}" alt="{{ certificate.title }}" class="certificate-image">
-                    <p class="certificate-title">{{ certificate.title }}</p>
                 </div>
+                <p class="certificate-title">{{ certificate.title }}</p>
                 {% if editable %}
                 <!-- Edit button -->
                 <button class="edit-certificate-btn" data-certificate-id="{{ certificate.pk }}">Edit</button>
