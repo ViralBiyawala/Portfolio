@@ -297,23 +297,26 @@ hr {
 
 .row1 {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
     justify-content: center;
     align-items: center;
-    margin: 0rem;
-    margin-bottom: 0.5rem;
+    margin: 0.4rem;
+    margin-bottom: 0rem;
+    height: 10rem;
 }
 
 .certificate-image {
-    width: 100px;
-    height: 80px;
+    position: relative;
+    width: 99%;
+    height: 90%;
     object-fit: cover;
-    border-radius: 0.7rem;
+    border-radius: 0.6rem;
 }
 
 .certificate-title {
     font-weight: bold;
-    margin: 0rem 1rem;
+    margin: 0.2rem 1rem;
     flex: 1;
     display: flex;
     align-items: center;
