@@ -9,6 +9,36 @@ from django.http import JsonResponse
 from .forms import CertificateForm, ProjectsForm, ResumeForm
 import json
 import os
+from django.apps import apps
+
+import re
+
+def remove_repeated_end_phrases(response, num_words=5):
+    # Split the response into sentences
+    sentences = response.split(". ")
+
+    # To keep the cleaned sentences
+    cleaned_sentences = []
+
+    # Process each sentence
+    for current_sentence in sentences:
+        current_sentence = current_sentence.strip()
+        if cleaned_sentences:
+            # Last sentence added to cleaned_sentences
+            last_cleaned_sentence = cleaned_sentences[-1].strip()
+            # Get the last num_words from the last cleaned sentence
+            last_words = ' '.join(last_cleaned_sentence.split()[-num_words:])
+
+            # Check if the current sentence ends with the last words of the previous sentence
+            if last_words and current_sentence.endswith(last_words):
+                # If it does, skip the current sentence
+                continue
+
+        cleaned_sentences.append(current_sentence)
+
+    # Join the cleaned sentences back together
+    filtered_response = ". ".join(cleaned_sentences).strip()
+    return filtered_response
 
 def dashboard_view(request):
 # Get the superuser directly
@@ -466,3 +496,24 @@ def download_resume(request):
 
 def custom_404(request, exception):
     return render(request, '404.html', status=404)
+
+# chatbot/views.py
+chatbot_manager = apps.get_app_config('viralapp').chatbot_manager
+agent_executor = apps.get_app_config('viralapp').agent_executor
+
+@csrf_exempt
+def ask(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)  # Load the JSON data from the request body
+            user_query = data.get('query')  # Get the 'query' field
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
+
+        if user_query is None:
+            return JsonResponse({'error': 'No query provided'}, status=400)
+
+        response = chatbot_manager.run_query(agent_executor, user_query)
+        response = remove_repeated_end_phrases(response, num_words=10)
+        return JsonResponse({'response': response})
+    return JsonResponse({'error': 'Invalid request method'}, status=405)

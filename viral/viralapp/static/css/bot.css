@@ -1,0 +1,149 @@
+        /* Floating chatbot button */
+        #chatbot-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ff6700;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 65px;
+            height: 65px;
+            font-size: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0px 0px 2px 4px rgba(0, 0, 0, 0.6);
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        #chatbot-button:hover {
+            box-shadow: 9px -12px 3px 0px rgba(0, 0, 0, 1.0);
+            transform: scale(1.2);
+        }
+
+        /* Chatbox container */
+        #chatbox-container {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 350px;
+            height: 450px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.85);
+            z-index: 999;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        #chatbox-container.open {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(100px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Chatbox header */
+        #chatbox-header {
+            background-color: #ff6700;
+            color: white;
+            padding: 15px;
+            border-radius: 15px 15px 0 0;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Chatbox messages */
+        #chatbox {
+            padding: 15px;
+            height: 307px;
+            overflow-y: scroll;
+            background-color: #f4f4f4;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .user-message {
+            color: #0056b3;
+            background-color: #d9ecff;
+            padding: 8px;
+            margin: 5px;
+            border-radius: 15px;
+            /* display: inline-block; */
+            max-width: 80%;
+            float: right;
+            /* Float to the right for user messages */
+            clear: both;
+        }
+
+        .bot-response {
+            color: #9c4c00;
+            background-color: #f5efb2;
+            padding: 8px;
+            margin: 5px;
+            border-radius: 15px;
+            /* display: inline-block; */
+            max-width: 80%;
+            float: left;
+            /* Float to the left for bot responses */
+            clear: both;
+        }
+
+        /* Chatbox footer */
+        #chatbox-footer {
+            padding: 10px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            border-radius: 0 0 15px 15px;
+        }
+
+        #chatbox-footer input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        #chatbox-footer input[type="text"]:focus {
+            border-color: #ff6700;
+        }
+
+        #chatbox-footer button {
+            background-color: #ff6700;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin-left: 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        #chatbox-footer button:hover {
+            background-color: #e65c00;
+        }
+
+        /* Clear floats after messages */
+        #chatbox .clearfix {
+            clear: both;
+        }

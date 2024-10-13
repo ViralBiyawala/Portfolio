@@ -1,5 +1,4 @@
 # viralapp/urls.py
-
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from . import views
@@ -31,6 +30,7 @@ urlpatterns = [
     path('update_project/<int:pk>/', views.update_project, name='update_project'),
     path('upload_resume/', views.upload_resume, name='upload_resume'),
     path('download_resume/', views.download_resume, name='download_resume'),
+    path('ask/', views.ask, name='ask'),
     # static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
