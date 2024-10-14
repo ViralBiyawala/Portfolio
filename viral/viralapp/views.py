@@ -10,10 +10,14 @@ from .forms import CertificateForm, ProjectsForm, ResumeForm
 import json
 import os
 from django.apps import apps
+import requests
 
 import re
 
 def remove_repeated_end_phrases(response, num_words=5):
+    # Remove any text after the first newline character
+    response = response.split('\n')[0]
+
     # Split the response into sentences
     sentences = response.split(". ")
 
@@ -497,10 +501,6 @@ def download_resume(request):
 def custom_404(request, exception):
     return render(request, '404.html', status=404)
 
-# chatbot/views.py
-chatbot_manager = apps.get_app_config('viralapp').chatbot_manager
-agent_executor = apps.get_app_config('viralapp').agent_executor
-
 @csrf_exempt
 def ask(request):
     if request.method == "POST":
@@ -513,7 +513,28 @@ def ask(request):
         if user_query is None:
             return JsonResponse({'error': 'No query provided'}, status=400)
 
-        response = chatbot_manager.run_query(agent_executor, user_query)
-        response = remove_repeated_end_phrases(response, num_words=10)
-        return JsonResponse({'response': response})
+        # Make a POST request to the external API
+        try:
+            api_url = "https://viralbot.pythonanywhere.com/chatbot"
+            payload = {"user_query": user_query}
+            headers = {'Content-Type': 'application/json'}
+            
+            # Send POST request to external API
+            external_response = requests.post(api_url, json=payload, headers=headers)
+            
+            if external_response.status_code == 200:
+                # Extract response text
+                external_data = external_response.json()
+                chatbot_response = external_data.get('response', '')
+
+                # Clean up repeated end phrases
+                filtered_response = remove_repeated_end_phrases(chatbot_response, num_words=10)
+
+                return JsonResponse({'response': filtered_response})
+            else:
+                return JsonResponse({'error': 'Failed to fetch data from the external API'}, status=external_response.status_code)
+
+        except requests.RequestException as e:
+            return JsonResponse({'error': f'Error occurred while contacting external API: {str(e)}'}, status=500)
+
     return JsonResponse({'error': 'Invalid request method'}, status=405)

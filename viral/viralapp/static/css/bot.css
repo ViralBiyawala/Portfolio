@@ -89,6 +89,7 @@
             float: right;
             /* Float to the right for user messages */
             clear: both;
+            text-align: right;
         }
 
         .bot-response {
@@ -102,6 +103,7 @@
             float: left;
             /* Float to the left for bot responses */
             clear: both;
+            text-align: left;
         }
 
         /* Chatbox footer */
