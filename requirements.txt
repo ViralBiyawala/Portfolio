@@ -5,4 +5,4 @@ pillow
 sqlparse
 tzdata
 django-cors-headers
-request
+requests
