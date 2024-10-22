@@ -33,7 +33,6 @@ class Education(models.Model):
         
         super().save(*args, **kwargs)
 
-
 class Certificate(models.Model):
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to='certificate/')
@@ -127,3 +126,24 @@ class Contact(models.Model):
     email = models.EmailField()
     phone = models.CharField(max_length=20)
     address = models.TextField()
+
+class WorkExperience(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    job_title = models.CharField(max_length=200)
+    company = models.CharField(max_length=200)
+    years = models.CharField(max_length=50)
+    display_order = models.IntegerField(default=0, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.job_title} at {self.company}"
+    
+    def save(self, *args, **kwargs):
+        if self.pk:
+            old_instance = WorkExperience.objects.get(pk=self.pk)
+            if self.display_order != old_instance.display_order:
+                existing_entries = WorkExperience.objects.filter(display_order=self.display_order)
+                if existing_entries.exists():
+                    for entry in existing_entries:
+                        entry.display_order += 1
+                        entry.save()
+        super().save(*args, **kwargs)

@@ -195,6 +195,39 @@ if (document.getElementById("add-education-form")) {
 }
 
 // dashboard.js
+if (document.getElementById("add-work-experience-form")) {
+    // Function to handle submission of the add work experience form
+    document.getElementById('add-work-experience-form').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Get form data
+        var formData = new FormData(this);
+        console.log(formData);
+
+        // Send AJAX request to add new work experience entry
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/add_work_experience/', true);
+        xhr.setRequestHeader('X-CSRFToken', '{{ csrf_token }}'); // Set CSRF token
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Handle success response
+                console.log('New work experience entry added successfully');
+                // Reload the page to reflect changes
+                window.location.reload();
+            }
+        };
+        xhr.send(formData);
+    });
+
+    // Function to handle click event on the "Add Work Experience" button
+    document.getElementById('add-work-experience-btn').addEventListener('click', function () {
+        // Toggle visibility of the add work experience form
+        var addWorkExperienceForm = document.getElementById('add-work-experience-form');
+        addWorkExperienceForm.style.display = addWorkExperienceForm.style.display === 'none' ? 'block' : 'none';
+    });
+}
+
+// dashboard.js
 if (document.getElementById("add-skill")) {
     // Function to handle submission of the add education form
     document.getElementById('add-skill').addEventListener('submit', function (event) {

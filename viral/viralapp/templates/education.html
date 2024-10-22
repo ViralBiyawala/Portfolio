@@ -12,12 +12,54 @@
 
 {% block content %}
 <!-- Main content -->
+ 
 <div class="main-content" id="promark">
-    <div class="join">
+
+        <!-- Work Experience Section -->
+        <div class="join">
+            <p>WORK EXPERIENCE</p>
+            <div class="horizontal-bar"></div>
+        </div>
+
+        <div id="education-container">
+            {% for entry in work_experience_entries|dictsortreversed:"id" %}
+            <div class="education-entry">
+                <div class="education-details">
+                    <p class="grad_year"> {{ entry.years }}</p>
+                    <p class="degree">{{ entry.job_title }}</p>
+                    <p class="school"> {{ entry.company }}</p>
+                </div>
+                <div class="education-actions">
+                    {% if editable %}
+                    <form method="post" action="{% url 'delete_work_experience' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="job_title" value="{{ entry.job_title }}">
+                        <input type="hidden" name="company" value="{{ entry.company }}">
+                        <input type="hidden" name="years" value="{{ entry.years }}">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    
+        {% if editable %}
+        <button id="add-work-experience-btn">Add Work Experience</button>
+        <form id="add-work-experience-form">
+            <input type="text" name="job_title" placeholder="Job Title">
+            <input type="text" name="company" placeholder="Company">
+            <input type="text" name="years" placeholder="Years">
+            <button type="submit">Add</button>
+        </form>
+        {% endif %}
+
+    <!-- <div class="join">
         <p>EDUCATION </p>
         <div class="horizontal-bar"></div>
-    </div>
+    </div> -->
 
+    <h3 class="subhead">EDUCATION</h3>
     <div id="education-container">
         {% for entry in education_entries %}
         <div class="education-entry">
@@ -27,8 +69,6 @@
                 <p class="school"> {{ entry.school }}</p>
             </div>
             <div class="education-actions">
-                <!-- Add Update and Delete buttons here -->
-                <!-- <button class="update-btn">Update</button> -->
                 {% if editable %}
                 <form method="post" action="{% url 'delete_education_entry' %}">
                     {% csrf_token %}
@@ -45,7 +85,6 @@
 
     {% if editable %}
     <button id="add-education-btn">Add Education</button>
-    <!-- Add form for adding new education entry (hidden by default) -->
     <form id="add-education-form">
         <input type="text" name="degree" placeholder="Degree">
         <input type="text" name="school" placeholder="School">
@@ -55,7 +94,7 @@
     </form>
     {% endif %}
 
-    <h3 class="subhead">Skills</h3>
+    <h3 class="subhead">SKILLS</h3>
     <div id="skills-container">
         {% for entry in skills_entries %}
         <span class="skill">{{ entry.skills_list }} 
@@ -72,7 +111,5 @@
     </form>
     {% endif %}
 
-    <!-- Add more sections as needed -->
 </div>
-<!-- Add more sections as needed -->
 {% endblock %}

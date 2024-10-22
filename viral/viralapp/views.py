@@ -2,7 +2,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
-from .models import Intro, BlogEntry, Education, Skills, Certificate, Projects, Resume
+from .models import Intro, BlogEntry, Education, Skills, Certificate, Projects, Resume, WorkExperience
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from django.http import JsonResponse
@@ -205,7 +205,7 @@ def delete_blog_entry(request):
 
 
 def education(request):
-# Get the superuser directly
+    # Get the superuser directly
     superuser = User.objects.filter(is_superuser=True).first()
 
     # Check if theme preference is toggled
@@ -217,33 +217,35 @@ def education(request):
     # Get the theme preference from the session or default to 'light'
     theme_preference = request.session.get('theme_preference', 'light')
 
-    # print(superuser)
+    # Get education entries for the superuser
+    education_entries = Education.objects.filter(user=superuser).order_by('-display_order')
+    
+    # Get skills entries
+    skills_entries = Skills.objects.filter(user=superuser)
+    
+    # Get work experience entries
+    work_experience_entries = WorkExperience.objects.filter(user=superuser).order_by('-display_order')
+
     allowed_extensions = ['jpg', 'jpeg', 'png']
-
-    education_entries = Education.objects.filter(user=User.objects.filter(is_superuser=True).first()).order_by('-display_order')
-    skills_entries = Skills.objects.filter()
-
     src = "/media/images/profile.jpg"
     # Check if an image file exists for the user
     for extension in allowed_extensions:
         image_path = f"/media/images/profile.{extension}"
-        if os.path.isfile(image_path) == True:
+        if os.path.isfile(image_path):
             src = f"/media/images/profile.{extension}"
             break
 
-    # editable = False
-    # editable = True
     mark = 'promark'
 
     context = {
         'theme_preference': theme_preference,
         'user': superuser,
         'is_superuser': True,
-        'link':src,
+        'link': src,
         'mark': mark,
         'education_entries': education_entries,
-        # 'editable': editable,
         'skills_entries': skills_entries,
+        'work_experience_entries': work_experience_entries,
     }
 
     return render(request, 'education.html', context)
@@ -454,7 +456,6 @@ def add_education_entry(request):
 
         # Associate the education entry with the current user
         Education.objects.create(user=User.objects.filter(is_superuser=True).first(), degree=degree, school=school, graduation_year=graduation_year, display_order=display_order)
-        # return JsonResponse({'message': 'Education entry added successfully'})
         return redirect('education')
 
 @csrf_exempt
@@ -464,7 +465,27 @@ def delete_education_entry(request):
         school = request.POST.get('school')
         graduation_year = request.POST.get('graduation_year')
         Education.objects.filter(degree=degree, school=school, graduation_year=graduation_year).delete()
-        # return JsonResponse({'message': 'Education entry deleted successfully'})
+        return redirect('education')
+
+@csrf_exempt
+def add_work_experience(request):
+    if request.method == 'POST':
+        job_title = request.POST.get('job_title')
+        company = request.POST.get('company')
+        years = request.POST.get('years')
+        display_order = request.POST.get('display_order')
+
+        # Associate the work experience entry with the current user
+        WorkExperience.objects.create(user=User.objects.filter(is_superuser=True).first(), job_title=job_title, company=company, years=years, display_order=display_order)
+        return redirect('education')
+
+@csrf_exempt
+def delete_work_experience(request):
+    if request.method == 'POST':
+        job_title = request.POST.get('job_title')
+        company = request.POST.get('company')
+        years = request.POST.get('years')
+        WorkExperience.objects.filter(job_title=job_title, company=company, years=years).delete()
         return redirect('education')
 
 def custom_logout(request):
@@ -504,33 +525,35 @@ def custom_404(request, exception):
 @csrf_exempt
 def ask(request):
     if request.method == "POST":
+        # print("hit")
         try:
             data = json.loads(request.body)  # Load the JSON data from the request body
             user_query = data.get('query')  # Get the 'query' field
+            # print(user_query)
         except json.JSONDecodeError:
+            # print("error")
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
 
         if user_query is None:
             return JsonResponse({'error': 'No query provided'}, status=400)
 
-        # Make a POST request to the external API
+        # Make a POST request to the external Flask API
         try:
-            api_url = "https://viralbot.pythonanywhere.com/chatbot"
+            # print("requesting")
+            api_url = "https://viralbot.pythonanywhere.com/chatbot"  # Local Flask API URL
             payload = {"user_query": user_query}
             headers = {'Content-Type': 'application/json'}
             
-            # Send POST request to external API
+            # Send POST request to Flask API
             external_response = requests.post(api_url, json=payload, headers=headers)
-            
+            print(external_response)
+
             if external_response.status_code == 200:
                 # Extract response text
                 external_data = external_response.json()
                 chatbot_response = external_data.get('response', '')
 
-                # Clean up repeated end phrases
-                filtered_response = remove_repeated_end_phrases(chatbot_response, num_words=10)
-
-                return JsonResponse({'response': filtered_response})
+                return JsonResponse({'response': chatbot_response})
             else:
                 return JsonResponse({'error': 'Failed to fetch data from the external API'}, status=external_response.status_code)
 
