@@ -6,3 +6,4 @@ sqlparse
 tzdata
 django-cors-headers
 requests
+werkzeug
