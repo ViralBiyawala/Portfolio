@@ -1,4 +1,4 @@
-﻿asgiref==3.7.2
+﻿asgiref==3.8.1
 numpy==1.26.4
 Django
 pillow
