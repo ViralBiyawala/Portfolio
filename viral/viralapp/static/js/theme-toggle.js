@@ -17,22 +17,32 @@ if (document.querySelector(".pp-label")) {
 
     inputFile.onchange = function () {
         // Add AJAX here to send the image path to the server
-        pp.src = URL.createObjectURL(inputFile.files[0]);
-        // ppMain.src = URL.createObjectURL(inputFile.files[0]);
-        const formData = new FormData();
-        formData.append("image", inputFile.files[0]);
-
-        console.log("Hi");
-
-        fetch("/update_img/", {
-            method: "POST",
-            body: formData,
-        })
-            .then((response) => response.text())
-            .then((data) => {
-                // Handle the response from the server if needed
-            });
-    };
+        const file = inputFile.files[0];
+    
+        // Display the uploaded image safely
+        if (file) {
+            pp.src = URL.createObjectURL(file);
+    
+            const formData = new FormData();
+            formData.append("image", file);
+    
+            console.log("Uploading image...");
+    
+            // Send the image to the server via AJAX
+            fetch("/update_img/", {
+                method: "POST",
+                body: formData,
+            })
+                .then((response) => response.text())
+                .then((data) => {
+                    // Handle the server response if needed
+                    console.log("Image uploaded successfully");
+                })
+                .catch((error) => {
+                    console.error("Error uploading image:", error);
+                });
+        }
+    };    
 
     // Change Profile Photo Pencil JS
     document.addEventListener("DOMContentLoaded", function () {
