@@ -13,6 +13,7 @@ from django.apps import apps
 import requests
 
 import re
+from werkzeug.utils import secure_filename
 
 def remove_repeated_end_phrases(response, num_words=5):
     # Remove any text after the first newline character
@@ -112,10 +113,8 @@ def update_img(request):
 
             # Generate a secure filename based on User_id and the file extension
             filename = f"profile{os.path.splitext(image.name)[1]}"
+            filename = secure_filename(filename)
             image_path = os.path.join("/home/ViralBiyawala/Portfolio/viral/media/images", filename)
-
-            # Ensure the directory exists
-            # os.makedirs(os.path.dirname(image_path), exist_ok=True)
 
             # Save the uploaded image with the User_id as the filename
             with open(image_path, 'wb') as destination:
