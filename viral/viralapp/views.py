@@ -557,6 +557,6 @@ def ask(request):
                 return JsonResponse({'error': 'Failed to fetch data from the external API'}, status=external_response.status_code)
 
         except requests.RequestException as e:
-            return JsonResponse({'error': f'Error occurred while contacting external API: {str(e)}'}, status=500)
+            return JsonResponse({'error': f'Error occurred while contacting external API!'}, status=500)
 
     return JsonResponse({'error': 'Invalid request method'}, status=405)
