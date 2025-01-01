@@ -1,17 +1,17 @@
 /* dashboard.css */
 /* scrool bar */
 .custom-scrollbar::-webkit-scrollbar {
-    width: 6px; 
-    height: 6px; 
+    width: 6px;
+    height: 6px;
     margin-top: 20px;
   }
-  
+
   .custom-scrollbar::-webkit-scrollbar-thumb {
     background: linear-gradient(to top, orange, rgb(248, 130, 27), red);
     border-radius: 5px;
     margin-left: 10px;
   }
-  
+
   .custom-scrollbar::-webkit-scrollbar-track {
     background-color: var(--background-color);
     margin-left: 10px;
@@ -106,15 +106,21 @@ hr {
 }
 
 .job{
-    font-size: 16px;
-    margin: 0.2rem 0rem;
-    margin-bottom: 0.1rem;
-    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 2px;
+    margin-top: 0px;
+    font-weight: 500;
 }
 
 #setting{
     margin: 0px;
     margin-top: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.log{
+    margin-top:10px;
+    /*margin-bottom*/
 }
 
 /* Right Side */
@@ -630,7 +636,7 @@ hr {
     }
 
 }
-/* 
+/*
 @media (max-width: 452px) {
     .btn-group {
         width: 70vw;
